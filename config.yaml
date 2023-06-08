@@ -1,0 +1,19 @@
+cookie:
+  expiry_days: 30
+  key: some_signature_key
+  name: some_cookie_name
+credentials:
+  usernames:
+    apce_estudis:
+      name: APCE Estudis
+      password: $2b$12$XuH4ikorx/3JiUKHKd3uVebT4S5DyKkEsGGoDroH.fwUqN9A67tsK
+preauthorized:
+  emails: [direcciogeneral@apcecat.cat, 
+          mcuixart@apcecat.cat, 
+          fina@apcecat.cat,
+          ecodina@apcecat.cat,
+          disseny@apceformacio.com,
+          administracio@apcecat.cat,
+          juridic@apcecat.cat,
+          mtorrent@apcecat.cat,
+          jdones@cogesi.cat]
