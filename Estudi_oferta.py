@@ -1263,7 +1263,7 @@ if selected == "Províncies i àmbits":
             df_prov_n = df_prov_filtered.sort_index(axis=1, level=[0,1])
             num_cols = df_prov_n.select_dtypes(include=['float64', 'int64']).columns
             df_prov_n[num_cols] = df_prov_n[num_cols].round(0)
-            df_prov_n[num_cols] = df_prov_n[num_cols].astype(int)
+            df_prov_n[num_cols] = df_prov_n[num_cols].astype("float64")
             num_cols = df_prov_n.select_dtypes(include=['float64', 'int']).columns
             df_prov_n[num_cols] = df_prov_n[num_cols].applymap(lambda x: '{:,.0f}'.format(x).replace(',', '#').replace('.', ',').replace('#', '.'))
             return(df_prov_n)
@@ -1288,10 +1288,10 @@ if selected == "Províncies i àmbits":
         ambit_names = sorted([ambit_n for ambit_n in ambits_df["GEO"].unique().tolist() if ambit_n!="Catalunya"])
         selected_option = st.sidebar.radio("**Àrea geogràfica**", ["Províncies", "Àmbits territorials"])
         if selected_option=="Àmbits territorials":
-            selected_geo = st.sidebar.selectbox('', ambit_names, index= ambit_names.index("Àmbit territorial Metropolità"))
+            selected_geo = st.sidebar.selectbox('', ambit_names, index= ambit_names.index("Metropolità"))
             st.title(f"{selected_geo}")
             min_year, max_year = st.sidebar.slider("**Interval d'anys de la mostra**", value=[2018, 2022], min_value=2018, max_value=2022)
-            st.markdown(table_geo(selected_geo, min_year, max_year, selected_option).to_html(), unsafe_allow_html=True, use_container_width=True)
+            st.markdown(table_geo(selected_geo, min_year, max_year, selected_option).to_html(), unsafe_allow_html=True)
             st.markdown(filedownload(table_geo(selected_geo, min_year, max_year, selected_option), f"Estudi_oferta_{selected_geo}.xlsx"), unsafe_allow_html=True)
         if selected_option=="Províncies":
             selected_geo = st.sidebar.selectbox('', prov_names, index= prov_names.index("Barcelona"))
@@ -1566,10 +1566,10 @@ if selected == "Províncies i àmbits":
         ambit_names = sorted([ambit_n for ambit_n in ambits_df["GEO"].unique().tolist() if ambit_n!="Catalunya"])
         selected_option = st.sidebar.radio("**Àrea geogràfica**", ["Províncies", "Àmbits territorials"])
         if selected_option=="Àmbits territorials":
-            selected_geo = st.sidebar.selectbox('', ambit_names, index= ambit_names.index("Àmbit territorial Metropolità"))
+            selected_geo = st.sidebar.selectbox('', ambit_names, index= ambit_names.index("Metropolità"))
             st.title(f"{selected_geo}")
             min_year, max_year = st.sidebar.slider("**Interval d'anys de la mostra**", value=[2018, 2023], min_value=2018, max_value=2023)
-            st.markdown(table_geo(selected_geo, min_year, max_year, selected_option).to_html(), unsafe_allow_html=True, use_container_width=True)
+            st.markdown(table_geo(selected_geo, min_year, max_year, selected_option).to_html(), unsafe_allow_html=True)
             st.markdown(filedownload(table_geo(selected_geo, min_year, max_year, selected_option), f"Estudi_oferta_{selected_geo}.xlsx"), unsafe_allow_html=True)
         if selected_option=="Províncies":
             selected_geo = st.sidebar.selectbox('', prov_names, index= prov_names.index("Barcelona"))
@@ -1650,7 +1650,7 @@ if selected == "Províncies i àmbits":
             def metric_estat(prov):
                 table11_prov = bbdd_estudi_prom_2023[["PROVINCIA", "HABIP"]].groupby("PROVINCIA").sum().reset_index()
                 hab_oferta = table11_prov[table11_prov["PROVINCIA"]==prov].iloc[0,1]
-                table17_hab_prov = bbdd_estudi_hab[["PROVINCIA", "ESTO"]].value_counts().reset_index().sort_values(["PROVINCIA", "ESTO"])
+                table17_hab_prov = bbdd_estudi_hab_2023[["PROVINCIA", "ESTO"]].value_counts().reset_index().sort_values(["PROVINCIA", "ESTO"])
                 table17_hab_prov.columns = ["PROVINCIA","ESTAT", "PROMOCIONS"]
                 table17_hab_prov = table17_hab_prov.pivot_table(index="PROVINCIA", columns="ESTAT", values="PROMOCIONS").reset_index()
                 table17_hab_prov = table17_hab_prov[["PROVINCIA","Claus en mà"]].rename(columns={"PROVINCIA": "Província","Claus en mà":"Acabats sobre habitatges en oferta"})
@@ -1716,7 +1716,7 @@ if selected == "Municipis":
 
 ############################################################  MUNICIPIS: 2022 ################################################
     if selected_edition=="2022":
-        mun_names = sorted(df_vf[df_vf["Any"]==2022]["GEO"].unique())
+        mun_names = sorted(df_vf[(df_vf["Any"]==2022) & (~df_vf["Valor"].isna())]["GEO"].unique())
         selected_mun = st.sidebar.selectbox('**Municipi seleccionat:**', mun_names, index= mun_names.index("Barcelona"))
         st.subheader(f"MUNICIPI DE {selected_mun.upper()}")
         @st.cache_data
@@ -1863,7 +1863,7 @@ if selected == "Municipis":
 
 ############################################################  MUNICIPIS: 2023 ################################################
     if selected_edition=="2023":
-        mun_names = sorted(df_vf[df_vf["Any"]==2023]["GEO"].unique())
+        mun_names = sorted(df_vf[(df_vf["Any"]==2023) & (~df_vf["Valor"].isna())]["GEO"].unique())
         selected_mun = st.sidebar.selectbox('**Municipi seleccionat:**', mun_names, index= mun_names.index("Barcelona"))
         st.subheader(f"MUNICIPI DE {selected_mun.upper()}")
         @st.cache_data
@@ -1900,10 +1900,10 @@ if selected == "Municipis":
         left_col, right_col = st.columns((1, 1))
         with left_col:
             st.markdown(f"""**Distribució de Preus per m2 útil**""")
-            st.plotly_chart(plotmun_streamlit(bbdd_estudi_hab_mod, selected_mun,"Preu m2 útil"), use_container_width=True, responsive=True)
+            st.plotly_chart(plotmun_streamlit(bbdd_estudi_hab_mod_2023, selected_mun,"Preu m2 útil"), use_container_width=True, responsive=True)
         with right_col:
             st.markdown(f"""**Distribució de Superfície útil**""")
-            st.plotly_chart(plotmun_streamlit(bbdd_estudi_hab_mod, selected_mun, "Superfície útil"), use_container_width=True, responsive=True)
+            st.plotly_chart(plotmun_streamlit(bbdd_estudi_hab_mod_2023, selected_mun, "Superfície útil"), use_container_width=True, responsive=True)
 
         st.markdown(f"""
         **Tipologia d'habitatges de les promocions**
@@ -1919,7 +1919,7 @@ if selected == "Municipis":
             fig.update_traces(marker=dict(color="#AAC4BA"))
             return fig
 
-        st.plotly_chart(count_plot_mun(bbdd_estudi_hab_mod, selected_mun), use_container_width=True, responsive=True)
+        st.plotly_chart(count_plot_mun(bbdd_estudi_hab_mod_2023, selected_mun), use_container_width=True, responsive=True)
 
         @st.cache_data
         def dormscount_plot_mun(data, selected_mun):
@@ -1946,11 +1946,11 @@ if selected == "Municipis":
         left_col, right_col = st.columns((1, 1))
         with left_col:
             st.markdown("""**Habitatges a la venda segons número d'habitacions**""")
-            st.plotly_chart(dormscount_plot_mun(bbdd_estudi_hab_mod, selected_mun), use_container_width=True, responsive=True)
+            st.plotly_chart(dormscount_plot_mun(bbdd_estudi_hab_mod_2023, selected_mun), use_container_width=True, responsive=True)
 
         with right_col:
             st.markdown("""**Habitatges a la venda segons número de Banys i lavabos**""")
-            st.plotly_chart(lavcount_plot_mun(bbdd_estudi_hab_mod, selected_mun), use_container_width=True, responsive=True)
+            st.plotly_chart(lavcount_plot_mun(bbdd_estudi_hab_mod_2023, selected_mun), use_container_width=True, responsive=True)
 
 
         st.header("Comparativa amb anys anteriors: Municipi de " + selected_mun)
@@ -2191,7 +2191,7 @@ if selected=="Districtes de Barcelona":
             df_preus['Valor'] = np.where(df_preus['Valor']==0, np.NaN, round(df_preus['Valor'], 1))
             df_preus['Any'] = df_preus['Any'].astype(int)
             df_preus = df_preus[df_preus["Tipologia"]!="TOTAL HABITATGES"]
-            fig = px.bar(df_preus, x='Any', y='Valor', color='Tipologia', color_discrete_sequence=["#AAC4BA","#00D0A3"], range_y=[0, None], labels={'Valor': variable_int, 'Any': 'Any'}, text= "Valor")
+            fig = px.bar(df_preus[df_preus["Valor"]>0], x='Any', y='Valor', color='Tipologia', color_discrete_sequence=["#AAC4BA","#00D0A3"], range_y=[0, None], labels={'Valor': variable_int, 'Any': 'Any'}, text= "Valor")
             fig.update_layout(font=dict(size=13), legend=dict(orientation='h', yanchor='bottom', y=1.05, xanchor='right', x=0.75))
             return fig
         @st.cache_data
@@ -2199,7 +2199,7 @@ if selected=="Districtes de Barcelona":
             df_preus = df_dis_long[(df_dis_long['Variable']==variable_int) & (df_dis_long['GEO']==selected_dis) & (df_dis_long["Any"]>=any_ini) & (df_dis_long["Any"]<=any_fin)].drop(['Variable'], axis=1).reset_index().drop('index', axis=1)
             df_preus['Valor'] = np.where(df_preus['Valor']==0, np.NaN, round(df_preus['Valor'], 1))
             df_preus['Any'] = df_preus['Any'].astype(int)
-            fig = px.bar(df_preus, x='Any', y='Valor', color='Tipologia', color_discrete_sequence=["#008B6C","#AAC4BA","#00D0A3"], range_y=[0, None], labels={'Valor': variable_int, 'Any': 'Any'}, text='Valor', barmode='group')
+            fig = px.bar(df_preus[df_preus["Valor"]>0], x='Any', y='Valor', color='Tipologia', color_discrete_sequence=["#008B6C","#AAC4BA","#00D0A3"], range_y=[0, None], labels={'Valor': variable_int, 'Any': 'Any'}, text='Valor', barmode='group')
             fig.update_layout(font=dict(size=13), legend=dict(orientation='h', yanchor='bottom', y=1, xanchor='right', x=0.75))
             return fig
         
@@ -2224,7 +2224,7 @@ if selected=="Districtes de Barcelona":
 
 ############################################################  DISTRICTES DE BARCELONA: 2023 ################################################
     if selected_edition=="2023":
-        dis_names_aux_num = sorted(bbdd_estudi_prom["Nom DIST"].dropna().unique().tolist())
+        dis_names_aux_num = sorted(bbdd_estudi_prom_2023["Nom DIST"].dropna().unique().tolist())
         dis_names_aux = [i[3:] for i in dis_names_aux_num]
         selected_dis = st.sidebar.selectbox('**Districte seleccionat:**', dis_names_aux)
         st.subheader("DISTRICTES DE BARCELONA")
@@ -2243,10 +2243,10 @@ if selected=="Districtes de Barcelona":
         st.subheader(f"{selected_dis.upper()}")
         @st.cache_data
         def data_text(selected_dis):
-            table80_mun = bbdd_estudi_hab_mod[(bbdd_estudi_hab_mod["Municipi"]=="Barcelona") & (bbdd_estudi_hab_mod["Nom DIST"]==selected_dis)][["Nom DIST", "TIPOG", "Superfície útil", "Preu mitjà", "Preu m2 útil"]].groupby(["Nom DIST"]).agg({"Nom DIST":['count'], "Superfície útil": [np.mean], "Preu mitjà": [np.mean], "Preu m2 útil": [np.mean]}).reset_index()
-            table25_mun = bbdd_estudi_hab[(bbdd_estudi_hab_mod["Municipi"]=="Barcelona") & (bbdd_estudi_hab_mod["Nom DIST"]==selected_dis)][["Nom DIST", "TIPOG"]].value_counts(normalize=True).reset_index().rename(columns={0:"Proporció"})
-            table61_hab = bbdd_estudi_hab[(bbdd_estudi_hab_mod["Municipi"]=="Barcelona") & (bbdd_estudi_hab_mod["Nom DIST"]==selected_dis)].groupby(['Total dormitoris']).size().reset_index(name='Proporcions').sort_values(by="Proporcions", ascending=False)
-            table61_lav = bbdd_estudi_hab[(bbdd_estudi_hab_mod["Municipi"]=="Barcelona") & (bbdd_estudi_hab_mod["Nom DIST"]==selected_dis)].groupby(['Banys i lavabos']).size().reset_index(name='Proporcions').sort_values(by="Proporcions", ascending=False)
+            table80_mun = bbdd_estudi_hab_mod_2023[(bbdd_estudi_hab_mod_2023["Municipi"]=="Barcelona") & (bbdd_estudi_hab_mod_2023["Nom DIST"]==selected_dis)][["Nom DIST", "TIPOG", "Superfície útil", "Preu mitjà", "Preu m2 útil"]].groupby(["Nom DIST"]).agg({"Nom DIST":['count'], "Superfície útil": [np.mean], "Preu mitjà": [np.mean], "Preu m2 útil": [np.mean]}).reset_index()
+            table25_mun = bbdd_estudi_hab_mod_2023[(bbdd_estudi_hab_mod_2023["Municipi"]=="Barcelona") & (bbdd_estudi_hab_mod_2023["Nom DIST"]==selected_dis)][["Nom DIST", "TIPOG"]].value_counts(normalize=True).reset_index().rename(columns={0:"Proporció"})
+            table61_hab = bbdd_estudi_hab_mod_2023[(bbdd_estudi_hab_mod_2023["Municipi"]=="Barcelona") & (bbdd_estudi_hab_mod_2023["Nom DIST"]==selected_dis)].groupby(['Total dormitoris']).size().reset_index(name='Proporcions').sort_values(by="Proporcions", ascending=False)
+            table61_lav = bbdd_estudi_hab_mod_2023[(bbdd_estudi_hab_mod_2023["Municipi"]=="Barcelona") & (bbdd_estudi_hab_mod_2023["Nom DIST"]==selected_dis)].groupby(['Banys i lavabos']).size().reset_index(name='Proporcions').sort_values(by="Proporcions", ascending=False)
 
             return([round(table80_mun["Preu mitjà"].values[0][0],2), round(table80_mun["Superfície útil"].values[0][0],2), 
                     round(table80_mun["Preu m2 útil"].values[0][0],2), round(table25_mun[table25_mun["TIPOG"]=="Habitatges Plurifamiliars"]["Proporció"].values[0]*100,2), 
@@ -2270,10 +2270,10 @@ if selected=="Districtes de Barcelona":
         left_col, right_col = st.columns((1, 1))
         with left_col:
             st.markdown(f"""**Distribució de Preus per m2 útil**""")
-            st.plotly_chart(plotdis_streamlit(bbdd_estudi_hab_mod, selected_dis,"Preu m2 útil"), use_container_width=True, responsive=True)
+            st.plotly_chart(plotdis_streamlit(bbdd_estudi_hab_mod_2023, selected_dis,"Preu m2 útil"), use_container_width=True, responsive=True)
         with right_col:
             st.markdown(f"""**Distribució de Superfície útil**""")
-            st.plotly_chart(plotdis_streamlit(bbdd_estudi_hab_mod, selected_dis, "Superfície útil"), use_container_width=True, responsive=True)
+            st.plotly_chart(plotdis_streamlit(bbdd_estudi_hab_mod_2023, selected_dis, "Superfície útil"), use_container_width=True, responsive=True)
 
         st.markdown(f"""
         **Tipologia d'habitatges de les promocions**
@@ -2289,7 +2289,7 @@ if selected=="Districtes de Barcelona":
             fig.update_traces(marker=dict(color="#AAC4BA"))
             return fig
 
-        st.plotly_chart(count_plot_dis(bbdd_estudi_hab_mod, selected_dis), use_container_width=True, responsive=True)
+        st.plotly_chart(count_plot_dis(bbdd_estudi_hab_mod_2023, selected_dis), use_container_width=True, responsive=True)
         @st.cache_data
         def dormscount_plot_dis(data, selected_dis):
             df = data[data['Nom DIST']==selected_dis]
@@ -2313,11 +2313,11 @@ if selected=="Districtes de Barcelona":
         left_col, right_col = st.columns((1, 1))
         with left_col:
             st.markdown("""**Habitatges a la venda segons número d'habitacions**""")
-            st.plotly_chart(dormscount_plot_dis(bbdd_estudi_hab_mod, selected_dis), use_container_width=True, responsive=True)
+            st.plotly_chart(dormscount_plot_dis(bbdd_estudi_hab_mod_2023, selected_dis), use_container_width=True, responsive=True)
 
         with right_col:
             st.markdown("""**Habitatges a la venda segons número de Banys i lavabos**""")
-            st.plotly_chart(lavcount_plot_dis(bbdd_estudi_hab_mod, selected_dis), use_container_width=True, responsive=True)
+            st.plotly_chart(lavcount_plot_dis(bbdd_estudi_hab_mod_2023, selected_dis), use_container_width=True, responsive=True)
 
 
         st.header(f"Comparativa amb anys anteriors: Districte de {selected_dis}")
