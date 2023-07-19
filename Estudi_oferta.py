@@ -674,13 +674,31 @@ def geo_mun():
     df_final = pd.merge(df_vf, df_unitats, how="left")
     df_final = df_final[df_final["GEO"]!="Catalunya"]
 
-
-    ambits_df = df_final.groupby(["Any", "Tipologia", "Variable", "Àmbits territorials"]).apply(weighted_mean).reset_index().rename(columns= {0:"Valor"})
+    ambits_df_aux1 = df_final.groupby(["Any", "Tipologia", "Variable", "Àmbits territorials"]).apply(weighted_mean).reset_index().rename(columns= {0:"Valor"})
+    ambits_df_aux2 = df_final[["Any","Àmbits territorials","Tipologia", "GEO", "Unitats"]].groupby(["Any", "Àmbits territorials", "Tipologia"]).sum().reset_index()
+    ambits_df_aux2_melted = pd.melt(ambits_df_aux2, id_vars=["Any", "Tipologia", "Àmbits territorials"], var_name="Variable", value_name="Unitats")
+    ambits_df_aux2_melted["Unitats"] = ambits_df_aux2_melted["Unitats"].astype("int64")
+    ambits_df_aux2_melted = ambits_df_aux2_melted.rename(columns={"Unitats":"Valor"})
+    ambits_df = pd.concat([ambits_df_aux1, ambits_df_aux2_melted], axis=0)
     ambits_df = ambits_df.rename(columns={"Àmbits territorials":"GEO"})
-    comarques_df = df_final.groupby(["Any", "Tipologia", "Variable", "Comarques"]).apply(weighted_mean).reset_index().rename(columns= {0:"Valor"}).dropna(axis=0)
+
+    comarques_df_aux1 = df_final.groupby(["Any", "Tipologia", "Variable", "Comarques"]).apply(weighted_mean).reset_index().rename(columns= {0:"Valor"}).dropna(axis=0)
+    comarques_df_aux2 = df_final[["Any","Comarques","Tipologia", "GEO", "Unitats"]].drop_duplicates(["Any","Comarques","Tipologia", "GEO", "Unitats"]).groupby(["Any", "Comarques", "Tipologia"]).sum().reset_index()
+    comarques_df_aux2_melted = pd.melt(comarques_df_aux2, id_vars=["Any", "Tipologia", "Comarques"], var_name="Variable", value_name="Unitats")
+    comarques_df_aux2_melted["Unitats"] = comarques_df_aux2_melted["Unitats"].astype("int64")
+    comarques_df_aux2_melted = comarques_df_aux2_melted.rename(columns={"Unitats":"Valor"})
+    comarques_df = pd.concat([comarques_df_aux1, comarques_df_aux2_melted], axis=0)
     comarques_df = comarques_df.rename(columns={"Comarques":"GEO"})
-    provincia_df = df_final.groupby(["Any", "Tipologia", "Variable", "Província"]).apply(weighted_mean).reset_index().rename(columns= {0:"Valor"})
+
+
+    provincia_df_aux1 = df_final.groupby(["Any", "Tipologia", "Variable", "Província"]).apply(weighted_mean).reset_index().rename(columns= {0:"Valor"})
+    provincia_df_aux2 = df_final[["Any","Província","Tipologia", "GEO", "Unitats"]].drop_duplicates(["Any","Província","Tipologia", "GEO", "Unitats"]).groupby(["Any", "Província", "Tipologia"]).sum().reset_index()
+    provincia_df_aux2_melted = pd.melt(provincia_df_aux2, id_vars=["Any", "Tipologia", "Província"], var_name="Variable", value_name="Unitats")
+    provincia_df_aux2_melted["Unitats"] = provincia_df_aux2_melted["Unitats"].astype("int64")
+    provincia_df_aux2_melted = provincia_df_aux2_melted.rename(columns={"Unitats":"Valor"})
+    provincia_df = pd.concat([provincia_df_aux1, provincia_df_aux2_melted], axis=0)
     provincia_df = provincia_df.rename(columns={"Província":"GEO"})
+
     return([df_vf, df_vf_aux, df_final, ambits_df, comarques_df, provincia_df])
 
 df_vf, df_vf_aux, df_final, ambits_df, comarques_df, provincia_df = geo_mun()
