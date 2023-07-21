@@ -167,7 +167,7 @@ def tidy_bbdd(any):
 
     # ["DORM", "LAV", "cuina_normal", "cuina_amer", "TER", "Golfes", "Safareig","Altres interiors","Altres exteriors" ]
 
-    bbdd_estudi_hab['TIPOG'] = np.where(bbdd_estudi_hab['TIPO'].isin([1,2]), 'Habitatges Unifamiliars', 'Habitatges Plurifamiliars')
+    bbdd_estudi_hab['TIPOG'] = np.where(bbdd_estudi_hab['TIPO'].isin([1,2]), 'Habitatges unifamiliars', 'Habitatges plurifamiliars')
     bbdd_estudi_hab['TIPO'] = bbdd_estudi_hab['TIPO'].map(mapping)
     bbdd_estudi_hab['QENERGC'] = bbdd_estudi_hab['QENERGC'].map(mapping3)
     bbdd_estudi_hab['APAR'] = bbdd_estudi_hab['APAR'].map(mapping4)
@@ -232,7 +232,7 @@ def tidy_bbdd(any):
     # Canviar de nom totes les qualitats
     bbdd_estudi_hab = bbdd_estudi_hab.rename(columns = {"QUALIC_5": "Aire condicionat", 
                                                         "QUALIC_6": "Bomba de calor", 
-                                                        "QUALI_A": "Aero", 
+                                                        "QUALI_A": "Aerotèrmia", 
                                                         'QUALIC_7':"Calefacció", 
                                                         'QUALIC_8':"Preinstal·lació d'A.C./B. Calor/Calefacció", 
                                                         'QUALIC_9': 'Parquet', 
@@ -245,7 +245,7 @@ def tidy_bbdd(any):
 
     bbdd_estudi_prom = bbdd_estudi_prom.rename(columns = {"QUALIC_5": "Aire condicionat", 
                                                         "QUALIC_6": "Bomba de calor", 
-                                                        "QUALI_A": "Aero", 
+                                                        "QUALI_A": "Aerotèrmia", 
                                                         'QUALIC_7':"Calefacció", 
                                                         'QUALIC_8':"Preinstal·lació d'A.C./B. Calor/Calefacció", 
                                                         'QUALIC_9': 'Parquet', 
@@ -288,13 +288,13 @@ def tidy_bbdd(any):
     vars = ['Zona enjardinada', 'Parc infantil', 'Piscina comunitària', 
             'Traster', 'Ascensor', 'Equipament Esportiu', 'Sala de jocs', 
             'Sauna', 'Altres', "Aire condicionat", "Bomba de calor", 
-            "Aero", "Calefacció", "Preinstal·lació d'A.C./B. Calor/Calefacció", 
+            "Aerotèrmia", "Calefacció", "Preinstal·lació d'A.C./B. Calor/Calefacció", 
             "Parquet", "Armaris encastats", 'Placa de cocció amb gas', 
             'Placa de cocció vitroceràmica', "Placa d'inducció", 'Plaques solars', "APAR"]
     vars_aux = ['Zona enjardinada', 'Parc infantil', 'Piscina comunitària', 
             'Traster', 'Ascensor', 'Equipament Esportiu', 'Sala de jocs', 
             'Sauna', 'Altres', "Aire condicionat", "Bomba de calor", 
-            "Aero", "Calefacció", "Preinstal·lació d'A.C./B. Calor/Calefacció", 
+            "Aerotèrmia", "Calefacció", "Preinstal·lació d'A.C./B. Calor/Calefacció", 
             "Parquet", "Armaris encastats", 'Placa de cocció amb gas', 
             'Placa de cocció vitroceràmica', "Placa d'inducció", 'Plaques solars', "Safareig","Terrasses, balcons i patis"]
     for i in vars:
@@ -406,7 +406,7 @@ def tidy_bbdd_semestral(any):
 
     # ["DORM", "LAV", "cuina_normal", "cuina_amer", "TER", "Golfes", "Safareig","Altres interiors","Altres exteriors" ]
 
-    bbdd_estudi_hab['TIPOG'] = np.where(bbdd_estudi_hab['TIPO'].isin([1,2]), 'Habitatges Unifamiliars', 'Habitatges Plurifamiliars')
+    bbdd_estudi_hab['TIPOG'] = np.where(bbdd_estudi_hab['TIPO'].isin([1,2]), 'Habitatges unifamiliars', 'Habitatges plurifamiliars')
     bbdd_estudi_hab['TIPO'] = bbdd_estudi_hab['TIPO'].map(mapping)
     # bbdd_estudi_hab['QENERGC'] = bbdd_estudi_hab['QENERGC'].map(mapping3)
     # bbdd_estudi_hab['APAR'] = bbdd_estudi_hab['APAR'].map(mapping4)
@@ -471,7 +471,7 @@ def tidy_bbdd_semestral(any):
     # # Canviar de nom totes les qualitats
     # bbdd_estudi_hab = bbdd_estudi_hab.rename(columns = {"QUALIC_5": "Aire condicionat", 
     #                                                     "QUALIC_6": "Bomba de calor", 
-    #                                                     "QUALI_A": "Aero", 
+    #                                                     "QUALI_A": "Aerotèrmia", 
     #                                                     'QUALIC_7':"Calefacció", 
     #                                                     'QUALIC_8':"Preinstal·lació d'A.C./B. Calor/Calefacció", 
     #                                                     'QUALIC_9': 'Parquet', 
@@ -484,7 +484,7 @@ def tidy_bbdd_semestral(any):
 
     # bbdd_estudi_prom = bbdd_estudi_prom.rename(columns = {"QUALIC_5": "Aire condicionat", 
     #                                                     "QUALIC_6": "Bomba de calor", 
-    #                                                     "QUALI_A": "Aero", 
+    #                                                     "QUALI_A": "Aerotèrmia", 
     #                                                     'QUALIC_7':"Calefacció", 
     #                                                     'QUALIC_8':"Preinstal·lació d'A.C./B. Calor/Calefacció", 
     #                                                     'QUALIC_9': 'Parquet', 
@@ -527,13 +527,13 @@ def tidy_bbdd_semestral(any):
     # vars = ['Zona enjardinada', 'Parc infantil', 'Piscina comunitària', 
     #         'Traster', 'Ascensor', 'Equipament Esportiu', 'Sala de jocs', 
     #         'Sauna', 'Altres', "Aire condicionat", "Bomba de calor", 
-    #         "Aero", "Calefacció", "Preinstal·lació d'A.C./B. Calor/Calefacció", 
+    #         "Aerotèrmia", "Calefacció", "Preinstal·lació d'A.C./B. Calor/Calefacció", 
     #         "Parquet", "Armaris encastats", 'Placa de cocció amb gas', 
     #         'Placa de cocció vitroceràmica', "Placa d'inducció", 'Plaques solars', "APAR"]
     # vars_aux = ['Zona enjardinada', 'Parc infantil', 'Piscina comunitària', 
     #         'Traster', 'Ascensor', 'Equipament Esportiu', 'Sala de jocs', 
     #         'Sauna', 'Altres', "Aire condicionat", "Bomba de calor", 
-    #         "Aero", "Calefacció", "Preinstal·lació d'A.C./B. Calor/Calefacció", 
+    #         "Aerotèrmia", "Calefacció", "Preinstal·lació d'A.C./B. Calor/Calefacció", 
     #         "Parquet", "Armaris encastats", 'Placa de cocció amb gas', 
     #         'Placa de cocció vitroceràmica', "Placa d'inducció", 'Plaques solars', "Safareig","Terrasses, balcons i patis"]
     # for i in vars:
@@ -655,7 +655,7 @@ def geo_mun():
 
     df_vf_aux['Variable']= np.where(df_vf_aux['Variable']=="Preu de     venda per      m² útil (€)", "Preu de venda per m² útil (€)", df_vf_aux['Variable'])
     df_vf_aux['Valor'] = pd.to_numeric(df_vf_aux['Valor'], errors='coerce')
-
+    df_vf_aux['GEO'] = np.where(df_vf_aux['GEO']=="Municipis de Catalunya", "Catalunya", df_vf_aux['GEO'])
     df_vf_aux = df_vf_aux[~df_vf_aux['GEO'].str.contains("província|Província|Municipis")]
 
     df_vf_merged = pd.merge(df_vf_aux, maestro_estudi, how="left", on="GEO")
@@ -664,8 +664,14 @@ def geo_mun():
     df_unitats = df_vf_merged[df_vf_merged["Variable"]=="Unitats"].drop("Variable", axis=1)
     df_unitats = df_unitats.rename(columns={"Valor": "Unitats"})
     # df_vf[df_vf["Província"].isna()]["GEO"].unique()
-    df_final = pd.merge(df_vf, df_unitats, how="left")
-    df_final = df_final[df_final["GEO"]!="Catalunya"]
+    df_final_cat = pd.merge(df_vf, df_unitats, how="left")
+    df_final = df_final_cat[df_final_cat["GEO"]!="Catalunya"]
+    df_final_cat_aux1 = df_final_cat[df_final_cat["GEO"]=="Catalunya"][["Any", "Tipologia", "Variable","Valor"]]
+    cat_df_aux2_melted = pd.melt(df_final_cat[df_final_cat["GEO"]=="Catalunya"][["Any", "Tipologia", "Unitats"]], id_vars=["Any", "Tipologia"], var_name="Variable", value_name="Unitats")
+    cat_df_aux2_melted["Unitats"] = cat_df_aux2_melted["Unitats"].astype("int64")
+    cat_df_aux2_melted = cat_df_aux2_melted.rename(columns={"Unitats":"Valor"})
+    df_final_cat = pd.concat([df_final_cat_aux1, cat_df_aux2_melted], axis=0)
+
 
     ambits_df_aux1 = df_final.groupby(["Any", "Tipologia", "Variable", "Àmbits territorials"]).apply(weighted_mean).reset_index().rename(columns= {0:"Valor"})
     ambits_df_aux2 = df_final[["Any","Àmbits territorials","Tipologia", "GEO", "Unitats"]].groupby(["Any", "Àmbits territorials", "Tipologia"]).sum().reset_index()
@@ -692,9 +698,9 @@ def geo_mun():
     provincia_df = pd.concat([provincia_df_aux1, provincia_df_aux2_melted], axis=0)
     provincia_df = provincia_df.rename(columns={"Província":"GEO"})
 
-    return([df_vf, df_vf_aux, df_final, ambits_df, comarques_df, provincia_df])
+    return([df_vf_aux, df_vf, df_final_cat, df_final, ambits_df, comarques_df, provincia_df])
 
-df_vf, df_vf_aux, df_final, ambits_df, comarques_df, provincia_df = geo_mun()
+df_vf_aux, df_vf, df_final_cat, df_final, ambits_df, comarques_df, provincia_df = geo_mun()
 
 
 def geo_dis_long():
@@ -821,7 +827,7 @@ if selected == "Catalunya":
                 def plot_caracteristiques():
                     table61_tipo = bbdd_estudi_hab.groupby(['Total dormitoris', 'Banys i lavabos']).size().div(len(bbdd_estudi_hab_mod)).reset_index(name='Proporcions').sort_values(by="Proporcions", ascending=False)
                     table61_tipo["Proporcions"] = table61_tipo["Proporcions"]*100
-                    table61_tipo["Tipologia"] = table61_tipo["Total dormitoris"].astype(str) + " dormitoris i " + table61_tipo["Banys i lavabos"].astype(str) + " banys"
+                    table61_tipo["Tipologia"] = np.where(table61_tipo["Banys i lavabos"]==1, table61_tipo["Total dormitoris"].astype(str) + " dormitoris i " + table61_tipo["Banys i lavabos"].astype(str) + " bany", table61_tipo["Total dormitoris"].astype(str) + " dormitoris i " + table61_tipo["Banys i lavabos"].astype(str) + " banys")
                     fig = px.bar(table61_tipo.head(4), x="Proporcions", y="Tipologia", orientation='h', title="", 
                     labels={'x':"Proporcions sobre el total d'habitatges", 'y':"Tipologia"})
                     fig.layout.xaxis.title.text = "Proporcions sobre el total d'habitatges"
@@ -850,7 +856,7 @@ if selected == "Catalunya":
             with left_col:
                 st.write("""<p><b>Principals qualitats dels habitatges</b></p>""", unsafe_allow_html=True)
                 def plot_qualitats():
-                    table62_hab = bbdd_estudi_hab[["Aire condicionat","Bomba de calor","Aero","Calefacció","Preinstal·lació d'A.C./B. Calor/Calefacció",'Parquet','Armaris encastats','Placa de cocció amb gas','Placa de cocció vitroceràmica',"Placa d'inducció",'Plaques solars']].sum(axis=0)
+                    table62_hab = bbdd_estudi_hab[["Aire condicionat","Bomba de calor","Aerotèrmia","Calefacció","Preinstal·lació d'A.C./B. Calor/Calefacció",'Parquet','Armaris encastats','Placa de cocció amb gas','Placa de cocció vitroceràmica',"Placa d'inducció",'Plaques solars']].rename(columns={"Aerotèrmia":"Aerotèrmia"}).sum(axis=0)
                     table62_hab = pd.DataFrame({"Qualitats":table62_hab.index, "Total":table62_hab.values})
                     table62_hab = table62_hab.set_index("Qualitats").apply(lambda row: (row / bbdd_estudi_hab.shape[0])*100).reset_index().sort_values("Total", ascending=True)
                     fig = px.bar(table62_hab, x="Total", y="Qualitats", orientation='h', title="", labels={'x':"Proporcions sobre el total d'habitatges", 'y':"Qualitats"})
@@ -876,35 +882,35 @@ if selected == "Catalunya":
         if selected_index=="Superfície i preus":
             left_col, right_col = st.columns((1, 1))
             with left_col:
-                st.subheader("SUPERFÍCIES I PREUS")
+                st.subheader("SUPERFÍCIE I PREUS")
                 st.write("""
                 <p>
                     En general, conforme augmenta la superfície també ho
-                    fa el nombre de dormitoris, situant-se la màxima recu-
-                    rrència en els habitatges de 3 dormitoris entre els 60 i els
-                    90m2, i en els de 2 dormitoris amb superfícies inferiors
-                    als 70m2.
+                    fa el nombre de dormitoris, situant-se la màxima recur-
+                    rència en els habitatges de 3 dormitoris entre els 60 i els
+                    90m\u00b2, i en els de 2 dormitoris amb superfícies inferiors
+                    als 70m\u00b2.
                     La mitjana de la superfície útil dels habitatges en venda
-                    en els municipis estudiats és de 80,7m2, amb un preu
-                    mig de 368.809€ (4.532,6€/m2 útil). Per sota de la mitjana de preu, a nivell general, se situen els habitatges d’un
+                    en els municipis estudiats és de 80,7m\u00b2, amb un preu
+                    mig de 368.809€ (4.532,6€/m\u00b2 útil). Per sota de la mitjana de preu, a nivell general, se situen els habitatges d’un,
                     de dos i de tres dormitoris. Si l’anàlisi es fa a partir de la
-                    mitjana del preu/m2 útil, per sota de la mitjana resten els
+                    mitjana del preu/m\u00b2 útil, per sota de la mitjana resten els
                     habitatges de 3 i 4 dormitoris.
                     El 16,8% del conjunt d’habitatges en oferta de venda
                     no supera els 210.000€. Entre aquests habitatges se situen el 46,6% de les d’un dormitori i el 29,2% dels de
-                    dos dormitoris. En la banda més alta es troben el 9,9% d’habitatges amb preus superiors als 600.000€, entre els
+                    dos dormitoris. A la banda més alta es troben el 9,9% d’habitatges amb preus superiors als 600.000€, entre els
                     quals es localitza el 66,0% dels de cinc o més dormitoris.
-                    Els habitatges unifamiliars obtenen mitjanes de superfície força més altes (155,5m2), així com de preu
-                    (515.392€), però el m2 útil (3.302€/m2) se situa per sota
+                    Els habitatges unifamiliars obtenen mitjanes de superfície força més altes (155,5m\u00b2), així com de preu
+                    (515.392€), però el m\u00b2 útil (3.302€/m\u00b2) se situa per sota
                     la mitjana general, evidenciant que el desplaçament a
                     l’alça del preu no compensa el de la superfície.
-                    Els habitatges unifamiliars obtenen mitjanes de superfície força més altes (155,5m2), així com de preu
-                    (515.392€), però el m2 útil (3.302€/m2) se situa per sota
+                    Els habitatges unifamiliars obtenen mitjanes de superfície força més altes (155,5m\u00b2), així com de preu
+                    (515.392€), però el m\u00b2 útil (3.302€/m\u00b2) se situa per sota
                     la mitjana general, evidenciant que el desplaçament a
                     l’alça del preu no compensa el de la superfície.
                     Els habitatges plurifamiliars estan més propers a les
                     mitjanes generals, doncs aporten força més influència sobre aquestes, amb una mitjana de superfície de
-                    77,5m2, un preu de venda de 362.492€, i un preu de venda per m2 útil de 4.586€.
+                    77,5m\u00b2, un preu de venda de 362.492€, i un preu de venda per m\u00b2 útil de 4.586€.
                 </p>""",
                 unsafe_allow_html=True
                 )
@@ -918,7 +924,7 @@ if selected == "Catalunya":
                     table76 = pd.concat([table76_tipo, table76_total], axis=0)
                     table76 = pd.merge(table76, bbdd_estudi_hab_mod[["TIPOG","Total dormitoris"]].groupby(["TIPOG","Total dormitoris"]).size().reset_index().rename(columns={0:"Total"}), how="left", on=["TIPOG","Total dormitoris"])
                     table76 = table76.rename(columns={"TIPOG":"Tipologia"})
-                    fig = px.bar(table76, x="Preu mitjà", y="Total dormitoris", color="Tipologia", orientation='h', color_discrete_sequence=["#00D0A3","#AAC4BA","#008B6C"], barmode="group", title="", labels={'x':"Preu m2 útil (mitjana)", 'y':"Tipologia d'habitatge"})
+                    fig = px.bar(table76, x="Preu mitjà", y="Total dormitoris", color="Tipologia", orientation='h', color_discrete_sequence=["#00D0A3","#AAC4BA","#008B6C"], barmode="group", title="", labels={'x':"Preu m\u00b2 útil (mitjana)", 'y':"Tipologia d'habitatge"})
                     fig.layout.xaxis.title.text = "Preu mitjà"
                     fig.layout.yaxis.title.text = "Tipologia d'habitatge"
                     fig.update_layout(font=dict(size=13), legend=dict(orientation='h', yanchor='bottom', y=1, xanchor='right', x=0.75))
@@ -926,7 +932,7 @@ if selected == "Catalunya":
                 st.plotly_chart(indicadors_preu_mitjanes(), use_container_width=True, responsive=True)
             left, right = st.columns((1,1))
             with left:
-                st.write("""<p><b>Preu per m2 útil per tipologia d'habitatge</b></p>""", unsafe_allow_html=True)
+                st.write("""<p><b>Preu per m\u00b2 útil per tipologia d'habitatge</b></p>""", unsafe_allow_html=True)
                 def indicadors_preum2_mitjanes():
                     table76_tipo = bbdd_estudi_hab_mod[["Total dormitoris", "TIPOG","Superfície útil", "Preu mitjà", "Preu m2 útil"]].set_index(["Total dormitoris", "TIPOG"]).groupby(["TIPOG", "Total dormitoris"]).apply(np.mean).reset_index()
                     table76_total = bbdd_estudi_hab_mod[["Total dormitoris","Superfície útil", "Preu mitjà", "Preu m2 útil"]].set_index(["Total dormitoris"]).groupby(["Total dormitoris"]).apply(np.mean).reset_index()
@@ -934,8 +940,8 @@ if selected == "Catalunya":
                     table76 = pd.concat([table76_tipo, table76_total], axis=0)
                     table76 = pd.merge(table76, bbdd_estudi_hab_mod[["TIPOG","Total dormitoris"]].groupby(["TIPOG","Total dormitoris"]).size().reset_index().rename(columns={0:"Total"}), how="left", on=["TIPOG","Total dormitoris"])
                     table76 = table76.rename(columns={"TIPOG":"Tipologia"})
-                    fig = px.bar(table76, x="Preu m2 útil", y="Total dormitoris", color="Tipologia", orientation='h', color_discrete_sequence=["#00D0A3","#AAC4BA","#008B6C"], barmode="group", title="", labels={'x':"Preu m2 útil (mitjana)", 'y':"Tipologia d'habitatge"})
-                    fig.layout.xaxis.title.text = "Preu per m2 útil"
+                    fig = px.bar(table76, x="Preu m2 útil", y="Total dormitoris", color="Tipologia", orientation='h', color_discrete_sequence=["#00D0A3","#AAC4BA","#008B6C"], barmode="group", title="", labels={'x':"Preu m\u00b2 útil (mitjana)", 'y':"Tipologia d'habitatge"})
+                    fig.layout.xaxis.title.text = "Preu per m\u00b2 útil"
                     fig.layout.yaxis.title.text = "Tipologia d'habitatge"
                     fig.update_layout(font=dict(size=13), legend=dict(orientation='h', yanchor='bottom', y=1, xanchor='right', x=0.75))
                     return(fig)
@@ -949,7 +955,7 @@ if selected == "Catalunya":
                     table76 = pd.concat([table76_tipo, table76_total], axis=0)
                     table76 = pd.merge(table76, bbdd_estudi_hab_mod[["TIPOG","Total dormitoris"]].groupby(["TIPOG","Total dormitoris"]).size().reset_index().rename(columns={0:"Total"}), how="left", on=["TIPOG","Total dormitoris"])
                     table76 = table76.rename(columns={"TIPOG":"Tipologia"})
-                    fig = px.bar(table76, x="Superfície útil", y="Total dormitoris", color="Tipologia", orientation='h', color_discrete_sequence=["#00D0A3","#AAC4BA","#008B6C"], barmode="group", title="", labels={'x':"Preu m2 útil (mitjana)", 'y':"Tipologia d'habitatge"})
+                    fig = px.bar(table76, x="Superfície útil", y="Total dormitoris", color="Tipologia", orientation='h', color_discrete_sequence=["#00D0A3","#AAC4BA","#008B6C"], barmode="group", title="", labels={'x':"Preu m\u00b2 útil (mitjana)", 'y':"Tipologia d'habitatge"})
                     fig.layout.xaxis.title.text = "Superfície útil"
                     fig.layout.yaxis.title.text = "Tipologia d'habitatge"
                     fig.update_layout(font=dict(size=13), legend=dict(orientation='h', yanchor='bottom', y=1, xanchor='right', x=0.75))
@@ -965,7 +971,7 @@ if selected == "Catalunya":
                     El 2022, els municipis estudiats registren un nombre de promocions inferior en 87 unitats respecte de
                     2021, aconseguint les 928. En relació amb el nombre
                     d’habitatges, el total de 2022 (8.181 habitatges) suposa un increment del 30% respecte dels 6.294 habitatges
-                    registrats en 2021. Cal fer esment que de les 1.015 promocions de 2021, 601 ja han estat totalment venudes
+                    registrats el 2021. Cal fer esment que de les 1.015 promocions de 2021, 601 ja han estat totalment venudes
                     al 2022 i, en relació als habitatges de 2021, el 52,6%
                     han estat venuts. En definitiva, el cens dut a terme el
                     2022 -com va passar l’any anterior- suposa una important renovació de les unitats mostrals: el 55,4% de les
@@ -982,28 +988,28 @@ if selected == "Catalunya":
                 </p>
                 <p>
                     La superfície mitjana dels habitatges a la venda el
-                    2022 és de 80,7m2, amb un descens del 4,9% respecte de 2021. Aquest descens es registra en els diferents
+                    2022 és de 80,7m\u00b2, amb un descens del 4,9% respecte de 2021. Aquest descens es registra en els diferents
                     tipus d’habitatge, a excepció del dels de 5 i més dormitoris, que registra un increment de superfície del 7,4%.
                     El preu mitjà de l’habitatge a la venda en els municipis
                     estudiats a Catalunya el 2022 és de 368.809€, un 2%
                     menys que el registrat el 2021. Aquest descens de preu
-                    es dona només en la tipologia d’habitatges de 3 dormitoris (la més nombrosa), mentre que a la resta de les
+                    es dona només a la tipologia d’habitatges de 3 dormitoris (la més nombrosa), mentre que a la resta de les
                     tipologies el preu s’incrementa de forma molt lleu, entre
                     un 0,8% i un 2%, excepte els habitatges de 5 i més dormitoris, amb un augment del 5,7%, si bé només hi ha 53
-                    unitats censades. Pel que fa al preu per m2 útil, en el conjunt dels municipis estudiats, és de 4.533€, valor que suposa un preu
+                    unitats censades. Pel que fa al preu per m\u00b2 útil, en el conjunt dels municipis estudiats, és de 4.533€, valor que suposa un preu
                     superior en un 2,5% respecte del 2021. Si aquestes mateixes consideracions sobre superfície,
-                    preu, i preu m2 útil les despleguem sobre l’agrupació
+                    preu, i preu m\u00b2 útil les despleguem sobre l’agrupació
                     d’habitatges unifamiliars i plurifamiliars trobem que:
                 </p>
                 <p>
                     Per tipologia, els habitatges unifamiliars registren un descens del
                     -9,0% pel que fa a superfície mitjana, i un lleuger -0,9%
                     pel que fa al preu mitjà de venda, mentre que el preu per
-                    m2 útil s’incrementa de mitjana un 8,3%.
+                    m\u00b2 útil s’incrementa de mitjana un 8,3%.
                     Per altra banda, els habitatges plurifamiliars veuen disminuïda la seva
                     superfície (-3,2%), i presenten variació quant a preu,
                     amb un descens del preu mitjà de venda del -1,6%, i un
-                    augment d’un 2,0% pel que fa a preu m2 útil.
+                    augment d’un 2,0% pel que fa a preu m\u00b2 útil.
                 </p>
                 <p>
                     En aquest sentit, cal recordar que l’evolució de l’IPC en
@@ -1026,12 +1032,24 @@ if selected == "Catalunya":
                     table_var["Tipologia"] = ["Total habitatges", "Habitatges unifamiliars", "Habitatges plurifamiliars"]
                     table_var_melted = pd.melt(table_var, id_vars="Tipologia", var_name = "Variable")
 
-                    fig = px.bar(table_var_melted, x="Tipologia", y="value", color="Variable", color_discrete_sequence=["#008B6C","#00D0A3","#AAC4BA"], barmode="group", title="", labels={'x':"Preu m2 útil (mitjana)", 'y':"Tipologia d'habitatge"})
+                    fig = px.bar(table_var_melted, x="Tipologia", y="value", color="Variable", color_discrete_sequence=["#008B6C","#00D0A3","#AAC4BA"], barmode="group", title="", labels={'x':"Preu m\u00b2 útil (mitjana)", 'y':"Tipologia d'habitatge"})
                     fig.layout.xaxis.title.text = "Tipologia"
                     fig.layout.yaxis.title.text = "Variació anual (%)"
                     fig.update_layout(font=dict(size=13), legend=dict(orientation='h', yanchor='bottom', y=1, x=0))
                     return(fig)
                 st.plotly_chart(plot_var_CAT(), use_container_width=True, responsive=True)
+
+            def table_geo_cat(any_ini, any_fin):
+                    df_cat = df_final_cat[(df_final_cat["Any"]>=any_ini) & (df_final_cat["Any"]<=any_fin)].drop_duplicates(["Any", "Tipologia", "Variable", "Valor"]).pivot(index=["Any"], columns=["Tipologia", "Variable"], values="Valor")
+                    df_cat_n = df_cat.sort_index(axis=1, level=[0,1])
+                    num_cols = df_cat_n.select_dtypes(include=['float64', 'int64']).columns
+                    df_cat_n[num_cols] = df_cat_n[num_cols].round(0)
+                    df_cat_n[num_cols] = df_cat_n[num_cols].astype(int)
+                    num_cols = df_cat_n.select_dtypes(include=['float64', 'int']).columns
+                    df_cat_n[num_cols] = df_cat_n[num_cols].applymap(lambda x: '{:,.0f}'.format(x).replace(',', '#').replace('.', ',').replace('#', '.'))
+                    return(df_cat_n)
+            st.markdown(table_geo_cat(2018, 2023).to_html(), unsafe_allow_html=True)
+            st.markdown(filedownload(table_geo_cat(2018, 2022), f"Estudi_oferta_Catalunya.xlsx"), unsafe_allow_html=True)
 ############################################################  CATALUNYA: 2023 ################################################
     if selected_edition=="2023":
         index_names = ["Introducció","Característiques", "Superfície i preus", "Comparativa 2023-2022"]
@@ -1041,7 +1059,7 @@ if selected == "Catalunya":
             st.subheader("**INTRODUCCIÓ**")
             st.write("""<p style="margin-top: 10px"> 
             <p>
-            L’estudi de l’oferta d’habitatges de nova construcció a Catalunya en la seva edició de l’any 2023, ha estat promogut i dirigit per l’Associació de Promotors de Catalunya i realitzat per CATCHMENT AMR.
+            L’Estudi de l’Oferta d’Habitatges de Nova Construcció a Catalunya en la seva edició de l’any 2023, ha estat promogut i dirigit per l’Associació de Promotors de Catalunya i realitzat per CATCHMENT AMR.
             El present informe contempla els resultats de l’anàlisi del mercat residencial d’habitatges de nova construcció a Catalunya, en referència a l’any 2023, amb les dades processades fins el mes de juny. 
             Es tracta doncs, d’unes dades provisionals i que es completaran amb la resta de la recerca de dades que es durà a terme fins a finals d’any. 
             </p>
@@ -1049,7 +1067,7 @@ if selected == "Catalunya":
             En aquest document es resumeixen les dades de l’oferta del mercat residencial d’obra nova, per tal de disposar d’informació actualitzada al mes de juny de 2023, del sector i de la seva evolució. 
             Aquest treball té una base censal, essent el fruit d’una recerca exhaustiva de les ofertes de les promocions d’habitatge d’obra nova mitjançant un treball de camp molt intensiu amb recerques on-line, telefòniques i algunes visites presencials. 
             El cens parteix de la darrera actualització realitzada l’any precedent (2022). 
-            En els municipis seleccionats per la seva significació en l’àmbit de l’habitatge, s’ha inventariat l’oferta d’obra nova i llurs característiques  tant quantitatives com qualitatives. Com novetat en l’edició de 2023, el nombre de municipis a estudiar s’ha incrementat, passant dels 102 de les edicions anteriors, a una selecció més amplia amb un total de 135 municipis. 
+            En els municipis seleccionats per la seva significació en l’àmbit de l’habitatge, s’ha inventariat l’oferta d’obra nova i llurs característiques  tant quantitatives com qualitatives. Com a novetat en l’edició de 2023, el nombre de municipis a estudiar s’ha incrementat, passant dels 102 de les edicions anteriors, a una selecció més amplia amb un total de 135 municipis. 
             En l’execució del treball de camp no han estat incloses les promocions amb limitació d’informació disponible, bàsicament no han estat considerades com unitats vàlides per la mostra les promocions sense informació contrastada de preus i superfícies.
             Els resultats que es presenten inclouen les informacions de les promocions localitzades a 108 municipis dels 135 objecte d’estudi. 
             Novament, cal incidir en que es tracta de dades provisionals i que les feines de recerca continuen i la cobertura de municipis s’incrementarà a finals d’any. 
@@ -1124,7 +1142,7 @@ if selected == "Catalunya":
                 st.write("""
                 <p>
                 El 50,1% dels habitatges en oferta són de 3 dormitoris i el 30,8% de dos dormitoris. S’observa doncs, una concentració del 80,9% de l’oferta d’habitatges en les tipologies de 2 i 3 dormitoris. 
-                En el cas de l’oferta d’habitatges de 4 dormitoris, es situa en un 12,6%. La resta, loft, un dormitori i 5 i més dormitoris, tenen penetracions molt baixes (6,5% en el seu conjunt).
+                En el cas de l’oferta d’habitatges de 4 dormitoris, es situa en un 12,6%. La resta, loft, un dormitori i 5 o més dormitoris, tenen penetracions molt baixes (6,5% en el seu conjunt).
                 </p>""",
                 unsafe_allow_html=True
                 )
@@ -1133,7 +1151,7 @@ if selected == "Catalunya":
                 def plot_caracteristiques():
                     table61_tipo = bbdd_estudi_hab_2023.groupby(['Total dormitoris', 'Banys i lavabos']).size().div(len(bbdd_estudi_hab_mod)).reset_index(name='Proporcions').sort_values(by="Proporcions", ascending=False)
                     table61_tipo["Proporcions"] = table61_tipo["Proporcions"]*100
-                    table61_tipo["Tipologia"] = table61_tipo["Total dormitoris"].astype(str) + " dormitoris i " + table61_tipo["Banys i lavabos"].astype(str) + " banys"
+                    table61_tipo["Tipologia"] = np.where(table61_tipo["Banys i lavabos"]==1, table61_tipo["Total dormitoris"].astype(str) + " dormitoris i " + table61_tipo["Banys i lavabos"].astype(str) + " bany", table61_tipo["Total dormitoris"].astype(str) + " dormitoris i " + table61_tipo["Banys i lavabos"].astype(str) + " banys")
                     fig = px.bar(table61_tipo.head(4), x="Proporcions", y="Tipologia", orientation='h', title="", 
                     labels={'x':"Proporcions sobre el total d'habitatges", 'y':"Tipologia"})
                     fig.layout.xaxis.title.text = "Proporcions sobre el total d'habitatges"
@@ -1151,13 +1169,13 @@ if selected == "Catalunya":
                 st.write("""
                 <p>
                 En general, conforme augmenta la superfície de l’habitatge, augmenta també el nombre de dormitoris, situant-se la màxima recurrència en els habitatges de 3 dormitoris (50,1% dels habitatges) 
-                amb una superfície mitjana de 83,4 m2 i en els de 2 dormitoris (30,8% dels habitatges) i una mitjana de superfície de 64,1 m2.
-                La mitjana de superfície útil dels habitatges censats és de 80,3 m2 (150,2 m2 en el cas dels habitatges unifamiliars i 76,7 m2 en els plurifamiliars). 
+                amb una superfície mitjana de 83,4 m\u00b2 i en els de 2 dormitoris (30,8% dels habitatges) i una mitjana de superfície de 64,1 m\u00b2.
+                La mitjana de superfície útil dels habitatges censats és de 80,3 m\u00b2 (150,2 m\u00b2 en el cas dels habitatges unifamiliars i 76,7 m\u00b2 en els plurifamiliars). 
                 Pel que fa al preu mitjà, pel conjunt d’habitatges és de 364.462 €, 561.198 € en el cas dels unifamiliars i 354.446 € en el cas dels plurifamiliars.
-                Els habitatges dels municipis de la província de Lleida, obtenen les mitjanes més altes de superfície, 87,2 m2. 
-                En el cas de la província de Girona, la mitjana de superfície és de 84,1 m2, en la província de Tarragona de 82,1 m2 i en la de Barcelona es localitza la mitjana de superfície més baixa, 79,4 m2.
-                Pel que fa als preus, les províncies de Barcelona i Girona presenten les xifres més elevades: 383.509 € i 352.445 € respectivament en termes de valor absolut, i 4.757 €/m2 i 4.245 €/m2 pel que fa al preu per m2 útil. 
-                Les províncies de Tarragona (245.530 €) i Lleida (204.894 €) tenen unes mitjanes de preu significativament més baixes i que es veuen reflectides també en el preu per m2/útil: 3.013 € y 2.226 € respectivament.
+                Els habitatges dels municipis de la província de Lleida, obtenen les mitjanes més altes de superfície, 87,2 m\u00b2. 
+                En el cas de la província de Girona, la mitjana de superfície és de 84,1 m\u00b2, en la província de Tarragona de 82,1 m\u00b2 i en la de Barcelona es localitza la mitjana de superfície més baixa, 79,4 m\u00b2.
+                Pel que fa als preus, les províncies de Barcelona i Girona presenten les xifres més elevades: 383.509 € i 352.445 € respectivament en termes de valor absolut, i 4.757 €/m\u00b2 i 4.245 €/m\u00b2 pel que fa al preu per m\u00b2 útil. 
+                Les províncies de Tarragona (245.530 €) i Lleida (204.894 €) tenen unes mitjanes de preu significativament més baixes i que es veuen reflectides també en el preu per m\u00b2/útil: 3.013 € y 2.226 € respectivament.
                 </p>""",
                 unsafe_allow_html=True
                 )
@@ -1179,7 +1197,7 @@ if selected == "Catalunya":
                 st.plotly_chart(indicadors_preu_mitjanes(), use_container_width=True, responsive=True)
             left, right = st.columns((1,1))
             with left:
-                st.write("""<p><b>Preu per m2 útil per tipologia d'habitatge</b></p>""", unsafe_allow_html=True)
+                st.write("""<p><b>Preu per m\u00b2 útil per tipologia d'habitatge</b></p>""", unsafe_allow_html=True)
                 def indicadors_preum2_mitjanes():
                     table76_tipo = bbdd_estudi_hab_mod_2023[["Total dormitoris", "TIPOG","Superfície útil", "Preu mitjà", "Preu m2 útil"]].set_index(["Total dormitoris", "TIPOG"]).groupby(["TIPOG", "Total dormitoris"]).apply(np.mean).reset_index()
                     table76_total = bbdd_estudi_hab_mod_2023[["Total dormitoris","Superfície útil", "Preu mitjà", "Preu m2 útil"]].set_index(["Total dormitoris"]).groupby(["Total dormitoris"]).apply(np.mean).reset_index()
@@ -1187,8 +1205,8 @@ if selected == "Catalunya":
                     table76 = pd.concat([table76_tipo, table76_total], axis=0)
                     table76 = pd.merge(table76, bbdd_estudi_hab_mod_2023[["TIPOG","Total dormitoris"]].groupby(["TIPOG","Total dormitoris"]).size().reset_index().rename(columns={0:"Total"}), how="left", on=["TIPOG","Total dormitoris"])
                     table76 = table76.rename(columns={"TIPOG":"Tipologia"})
-                    fig = px.bar(table76, x="Preu m2 útil", y="Total dormitoris", color="Tipologia", orientation='h', color_discrete_sequence=["#00D0A3","#AAC4BA","#008B6C"], barmode="group", title="", labels={'x':"Preu m2 útil (mitjana)", 'y':"Tipologia d'habitatge"})
-                    fig.layout.xaxis.title.text = "Preu per m2 útil"
+                    fig = px.bar(table76, x="Preu m\u00b2 útil", y="Total dormitoris", color="Tipologia", orientation='h', color_discrete_sequence=["#00D0A3","#AAC4BA","#008B6C"], barmode="group", title="", labels={'x':"Preu m\u00b2 útil (mitjana)", 'y':"Tipologia d'habitatge"})
+                    fig.layout.xaxis.title.text = "Preu per m\u00b2 útil"
                     fig.layout.yaxis.title.text = "Tipologia d'habitatge"
                     fig.update_layout(font=dict(size=13), legend=dict(orientation='h', yanchor='bottom', y=1, xanchor='right', x=0.75))
                     return(fig)
@@ -1215,20 +1233,20 @@ if selected == "Catalunya":
                 st.subheader("**COMPARATIVA 2023-2022**") 
                 st.write("""
                 <p>
-                    La superfície mitjana dels habitatges a la venda a baixat molt lleugerament, en concret un -0,5%, passant dels 80,7 m2 de 2022 als actuals 80,3 m2. Els habitatges de 4 i de 5 o més dormitoris 
+                    La superfície mitjana dels habitatges a la venda ha baixat molt lleugerament, en concret un -0,5%, passant dels 80,7 m\u00b2 de 2022 als actuals 80,3 m\u00b2. Els habitatges de 4 i de 5 o més dormitoris 
                     incrementen la seva superfície en un 2,2% i 3,5% respectivament. Els habitatges en més presència, els de 3 dormitoris, baixen en termes de superfície útil un -0,4%.
                 </p>
                 <p>
-                    El preu mitjà de l’habitatge a la venda en Catalunya és de 364.462 €, 4.347 € menys que a finals de 2022 quan el preu es situava en 368.809 €. 
+                    El preu mitjà de l’habitatge a la venda a Catalunya és de 364.462 €, 4.347 € menys que a finals de 2022 quan el preu es situava en 368.809 €. 
                     Els habitatges tipus loft i de 2 dormitoris, són els que més han baixat el preu: -5,0% i -3,6% respectivament.  
                     En el cas de la tipologia més habitual, 3 dormitoris, es produeix un descens mínim de -0,1%. Els habitatges de 4 dormitoris, són l’única tipologia amb un increment de preu, en concret, +1,6%.
                     A les províncies de Girona i Lleida el preu mitjà de venda de l’habitatge baixa en un -6,3% i un -2,6% respectivament. 
-                    En la província de Tarragona la variació es mínima: +0,6%. Mentre que en el cas de la província de Barcelona el preu mitjà baixa un -1,6%. Aquest mateix descens de la província de Barcelona, es dona també a la ciutat de Barcelona.
+                    A la província de Tarragona la variació és mínima: +0,6%. Mentre que en el cas de la província de Barcelona el preu mitjà baixa un -1,6%. Aquest mateix descens de la província de Barcelona, es dona també a la ciutat de Barcelona.
 
                 </p>
                 <p>
-                    El preu de venda per m2 útil varia en el conjunt de Catalunya un lleuger -0,8% de 2022 a juny de 2023. 
-                    Per tipologies, totes presenten un descens en el preu de venda per m2 útil: un -5,0% als habitatges tipus Loft i un -2,3% als de 2 dormitoris; a les tipologies d’1, 3 i 4 dormitoris es produeix un descens mínim (entre un -0,1% i un -0,3%); 
+                    El preu de venda per m\u00b2 útil varia en el conjunt de Catalunya un lleuger -0,8% de 2022 a juny de 2023. 
+                    Per tipologies, totes presenten un descens en el preu de venda per m\u00b2 útil: un -5,0% als habitatges tipus Loft i un -2,3% als de 2 dormitoris; a les tipologies d’1, 3 i 4 dormitoris es produeix un descens mínim (entre un -0,1% i un -0,3%); 
                     mentre que als habitatges de 5 i més dormitoris el descens és d’un -1,2%.
                 </p>""",
                 unsafe_allow_html=True
@@ -1248,12 +1266,23 @@ if selected == "Catalunya":
                     table_var["Tipologia"] = ["Total habitatges", "Habitatges unifamiliars", "Habitatges plurifamiliars"]
                     table_var_melted = pd.melt(table_var, id_vars="Tipologia", var_name = "Variable")
 
-                    fig = px.bar(table_var_melted, x="Tipologia", y="value", color="Variable", color_discrete_sequence=["#008B6C","#00D0A3","#AAC4BA"], barmode="group", title="", labels={'x':"Preu m2 útil (mitjana)", 'y':"Tipologia d'habitatge"})
+                    fig = px.bar(table_var_melted, x="Tipologia", y="value", color="Variable", color_discrete_sequence=["#008B6C","#00D0A3","#AAC4BA"], barmode="group", title="", labels={'x':"Preu m\u00b2 útil (mitjana)", 'y':"Tipologia d'habitatge"})
                     fig.layout.xaxis.title.text = "Tipologia"
                     fig.layout.yaxis.title.text = "Variació anual (%)"
                     fig.update_layout(font=dict(size=13), legend=dict(orientation='h', yanchor='bottom', y=1, x=0))
                     return(fig)
                 st.plotly_chart(plot_var_CAT(), use_container_width=True, responsive=True)
+            def table_geo_cat(any_ini, any_fin):
+                df_cat = df_final_cat[(df_final_cat["Any"]>=any_ini) & (df_final_cat["Any"]<=any_fin)].drop_duplicates(["Any", "Tipologia", "Variable", "Valor"]).pivot(index=["Any"], columns=["Tipologia", "Variable"], values="Valor")
+                df_cat_n = df_cat.sort_index(axis=1, level=[0,1])
+                num_cols = df_cat_n.select_dtypes(include=['float64', 'int64']).columns
+                df_cat_n[num_cols] = df_cat_n[num_cols].round(0)
+                df_cat_n[num_cols] = df_cat_n[num_cols].astype(int)
+                num_cols = df_cat_n.select_dtypes(include=['float64', 'int']).columns
+                df_cat_n[num_cols] = df_cat_n[num_cols].applymap(lambda x: '{:,.0f}'.format(x).replace(',', '#').replace('.', ',').replace('#', '.'))
+                return(df_cat_n)
+            st.markdown(table_geo_cat(2018, 2023).to_html(), unsafe_allow_html=True)
+            st.markdown(filedownload(table_geo_cat(2018, 2022), f"Estudi_oferta_Catalunya.xlsx"), unsafe_allow_html=True)
 
 ############################################################  PROVÍNCIES I ÀMBITS TERRITORIALS ################################################
 
@@ -1298,18 +1327,18 @@ if selected == "Províncies i àmbits":
             selected_geo = st.sidebar.selectbox('', prov_names, index= prov_names.index("Barcelona"))
             st.title(f"PROVÍNCIA DE {selected_geo.upper()}")
             if selected_geo=="Barcelona":
-                st.write(f"""Els municipis analitzats en l’Estudi de l’Oferta d’Habitatge
+                st.write(f"""Els municipis analitzats a l’Estudi de l’Oferta d’Habitatge
                             de Nova Construcció a Catalunya 2022 que pertanyen a
                             la província de Barcelona fan que aquesta se situï en primera
                             posició pel que fa a la mitjana de preu (389.716€)
-                            i també en quant al preu €/m2 de superfície útil (4.796€),
+                            i també quant al preu €/m\u00b2 de superfície útil (4.796€),
                             ambdós influenciats pel municipi de Barcelona en incidir
                             sobre les mitjanes de forma determinant, tant per la seva
                             aportació quantitativa com qualitativa. Addicionalment,
                             Barcelona se situa com la quarta província pel que fa a
-                            la mitjana de superfície, de 79,6m2.
+                            la mitjana de superfície, de 79,6m\u00b2.
                             El número de promocions en oferta als municipis estudiats
-                            en la província de Barcelona l’any 2022 era
+                            a la província de Barcelona l’any 2022 era
                             de 730, amb 6.190 habitatges, xifra que representa el
                             78,7% del total de les promocions estudiades. El percentatge
                             d’habitatges que restaven per vendre és del
@@ -1318,25 +1347,25 @@ if selected == "Províncies i àmbits":
                             estudi ja estaven venuts el 63,8% dels habitatges, majoritàriament
                             sobre plànol).
                             Pel que fa als habitatges unifamiliars, la mitjana de
-                            superficie a la província se situa en 161,4m2, la mitjana
-                            de preu de venda en 637.229€ i la de preu m2/ útil
+                            superficie a la província se situa en 161,4m\u00b2, la mitjana
+                            de preu de venda en 637.229€ i la de preu m\u00b2/ útil
                             en 3.813,6€. Pel que fa als habitatges plurifamiliars,
                             la superfície mitjana -en base als municipis estudiats
-                            situats a la província- és de 77,3m2, amb una mitjana
-                            de preu de venda de 382.726€, i un preu mitjà per m2
+                            situats a la província- és de 77,3m\u00b2, amb una mitjana
+                            de preu de venda de 382.726€, i un preu mitjà per m\u00b2
                             útil de 4.824€.""")
             if selected_geo=="Girona":
-                st.write(f"""Els municipis analitzats en l’estudi 2022 que pertanyen a
+                st.write(f"""Els municipis analitzats a l’estudi 2022 que pertanyen a
                             la província de Girona fan que aquesta se situï en tercera
-                            posició en la mitjana de superfície (82,5m2), i en segona
-                            posició respecte al preu mitjà (376.023€) i en el preu m2
+                            posició en la mitjana de superfície (82,5m\u00b2), i en segona
+                            posició respecte al preu mitjà (376.023€) i en el preu m\u00b2
                             de superfície útil (4.684€).
                             Pel que fa als habitatges plurifamiliars, la superfície
-                            mitjana se situa en els 79,1m2, amb un preu mitjà
-                            de 374.049€, i un preu per m2 de superfície útil
+                            mitjana se situa en els 79,1m\u00b2, amb un preu mitjà
+                            de 374.049€, i un preu per m\u00b2 de superfície útil
                             de 4.789€. Respecte dels habitatges unifamiliars,
-                            aquestes mitjanes són de 131m2 de superfície, un
-                            preu mitjà de 404.350€, i un preu per m2 de superfície
+                            aquestes mitjanes són de 131m\u00b2 de superfície, un
+                            preu mitjà de 404.350€, i un preu per m\u00b2 de superfície
                             útil de 3.180€.
                             El número de promocions en oferta als municipis estudiats
                             a la província de Girona el 2022 era de 85 (un 9,2%
@@ -1344,19 +1373,19 @@ if selected == "Províncies i àmbits":
                             habitatges en venda.
                             El percentatge d’habitatges que restaven per vendre és
                             del 52,1% sobre un total de 1.884 habitatges existents
-                            en les promocions de la província.""")
+                            a les promocions de la província.""")
             if selected_geo=="Tarragona":
-                st.write(f"""Els municipis analitzats en l’estudi que pertanyen a la
+                st.write(f"""Els municipis analitzats a l’estudi que pertanyen a la
                             província de Tarragona fan que aquesta se situï en segona
-                            posició pel que fa a superfície mitjana (85,3m2), i
+                            posició pel que fa a superfície mitjana (85,3m\u00b2), i
                             en tercera posició tant pel que fa a les mitjanes de preu
-                            (244.164€) i de preu per m2 de superfície útil (2.958€).
+                            (244.164€) i de preu per m\u00b2 de superfície útil (2.958€).
                             Per tipologies d’habitatges, en els habitatges unifamiliars
-                            les mitjanes registrades són: 167,2m2 de superfície,
-                            amb un preu mitjà de 370.785€, i un preu per m2 de superfície
+                            les mitjanes registrades són: 167,2m\u00b2 de superfície,
+                            amb un preu mitjà de 370.785€, i un preu per m\u00b2 de superfície
                             útil de 2.377€. Pel que fa als habitatges plurifamiliars,
-                            la superfície mitjana se situa en els 73,6m2, amb
-                            un preu mitjà de 226.195€, i un preu per m2 útil de 3.040€.
+                            la superfície mitjana se situa en els 73,6m\u00b2, amb
+                            un preu mitjà de 226.195€, i un preu per m\u00b2 útil de 3.040€.
                             El número de promocions en oferta als municipis estudiats
                             a la província de Tarragona el 2022 era de 81, xifra
                             que representa un 8,7% del total de les promocions
@@ -1365,21 +1394,21 @@ if selected == "Províncies i àmbits":
                             33,2% sobre un total de 2.084 habitatges existents en les
                             promocions de la província.""")
             if selected_geo=="Lleida":
-                st.write(f"""Els municipis analitzats en l’estudi 2022 que pertanyen
+                st.write(f"""Els municipis analitzats a l’estudi 2022 que pertanyen
                             a la província de Lleida obtenen la mitjana més alta de
-                            superfície (86,5m2), i se situen en quarta posició pel que
-                            fa a preu del m2 de superfície útil (2.351€).
+                            superfície (86,5m\u00b2), i se situen en quarta posició pel que
+                            fa a preu del m\u00b2 de superfície útil (2.351€).
                             Pel que fa habitatges plurifamiliars, la superfície mitja
-                            provincial és de 83,8m2 i un preu mitjà per m2 útil de
-                            2.292€. En el cas dels als habitatges unifamiliars,
-                            aquestes quantitats són de 131,7m2 de superfície mitjana
-                            i de 3.327€ la mitjana del m2 de superfície útil.
+                            provincial és de 83,8m\u00b2 i un preu mitjà per m\u00b2 útil de
+                            2.292€. En el cas dels habitatges unifamiliars,
+                            aquestes quantitats són de 131,7m\u00b2 de superfície mitjana
+                            i de 3.327€ la mitjana del m\u00b2 de superfície útil.
                             El número de promocions en oferta als municipis estudiats
                             a la província de Lleida el 2022 era de 32 (amb 317
                             habitatges en venda), dada que representa un 3,4% del
                             total de les promocions estudiades (928 promocions). El
                             percentatge d’habitatges que restaven per vendre és del
-                            44,8% sobre un total de 707 habitatges existents en les
+                            44,8% sobre un total de 707 habitatges existents a les
                             promocions a la província.""")
             min_year, max_year = st.sidebar.slider("**Interval d'anys de la mostra**", value=[2018, 2022], min_value=2018, max_value=2022)
             st.markdown(table_geo(selected_geo, min_year, max_year, selected_option).to_html(), unsafe_allow_html=True)
@@ -1467,7 +1496,7 @@ if selected == "Províncies i àmbits":
                 table38hab_prov.columns = ["Tipus", "Habitatges en oferta"]
                 return([table38hab_prov.iloc[0,1], table38hab_prov.iloc[1,1]])
             def qualitats_prov(prov):
-                table62_hab = bbdd_estudi_hab[bbdd_estudi_hab["PROVINCIA"]==prov][["Aire condicionat","Bomba de calor","Aero","Calefacció","Preinstal·lació d'A.C./B. Calor/Calefacció",'Parquet','Armaris encastats','Placa de cocció amb gas','Placa de cocció vitroceràmica',"Placa d'inducció",'Plaques solars']].sum(axis=0)
+                table62_hab = bbdd_estudi_hab[bbdd_estudi_hab["PROVINCIA"]==prov][["Aire condicionat","Bomba de calor","Aerotèrmia","Calefacció","Preinstal·lació d'A.C./B. Calor/Calefacció",'Parquet','Armaris encastats','Placa de cocció amb gas','Placa de cocció vitroceràmica',"Placa d'inducció",'Plaques solars']].sum(axis=0)
                 table62_hab = pd.DataFrame({"Equipaments":table62_hab.index, "Total":table62_hab.values})
                 table62_hab = table62_hab.set_index("Equipaments").apply(lambda row: (row / bbdd_estudi_hab.shape[0])*100)
                 table62_hab = table62_hab.sort_values("Total", ascending=True)
@@ -1530,7 +1559,7 @@ if selected == "Províncies i àmbits":
                         textinfo='percent+label' 
                     ))
                     fig.update_layout(
-                        title=f'Habitatges en construció i acabats',
+                        title=f'Habitatges en construcció i acabats',
                         font=dict(size=12),
                         legend=dict(
                             x=0.7,  # Set legend position
@@ -1676,7 +1705,7 @@ if selected == "Províncies i àmbits":
                         textinfo='percent+label' 
                     ))
                     fig.update_layout(
-                        title=f'Habitatges en construció i acabats',
+                        title=f'Habitatges en construcció i acabats',
                         font=dict(size=12),
                         legend=dict(
                             x=0.7,  # Set legend position
@@ -1724,8 +1753,8 @@ if selected == "Municipis":
                     round(table80_mun["Preu m2 útil"].values[0][0],2), proporcio_tipo, 
                     table61_hab["Total dormitoris"].values[0], table61_lav["Banys i lavabos"].values[0]])
 
-        st.markdown(f"""Els resultats de l'estudi d'oferta de nova construcció de 2022 pel municipi de {selected_mun} mostren que el preu mitjà dels habitatges en venda es troba 
-        en {data_text(selected_mun)[0]} € amb una superfície mitjana útil de {data_text(selected_mun)[1]} m2. Per tant, el preu per m2 útil es troba en {data_text(selected_mun)[2]} € de mitjana. Per tipologies, els habitatges plurifamiliars
+        st.markdown(f"""Els resultats de l'Estudi d'Oferta de Nova Construcció del 2022 pel municipi de {selected_mun} mostren que el preu mitjà dels habitatges en venda es troba 
+        en {data_text(selected_mun)[0]} € amb una superfície mitjana útil de {data_text(selected_mun)[1]} m\u00b2. Per tant, el preu per m\u00b2 útil es troba en {data_text(selected_mun)[2]} € de mitjana. Per tipologies, els habitatges plurifamiliars
         representen el {data_text(selected_mun)[3]}% sobre el total d'habitatges, la resta corresponen a habitatges unifamiliars. L'habitatge modal o més freqüent de nova construcció té {data_text(selected_mun)[4]} habitacions i {data_text(selected_mun)[5]} banys o lavabos.""")
 
         def plotmun_streamlit(data, selected_mun, kpi):
@@ -1741,10 +1770,10 @@ if selected == "Municipis":
 
         left_col, right_col = st.columns((1, 1))
         with left_col:
-            st.markdown(f"""**Distribució de Preus per m2 útil**""")
+            st.markdown(f"""**Distribució de preus per m\u00b2 útil**""")
             st.plotly_chart(plotmun_streamlit(bbdd_estudi_hab_mod, selected_mun,"Preu m2 útil"), use_container_width=True, responsive=True)
         with right_col:
-            st.markdown(f"""**Distribució de Superfície útil**""")
+            st.markdown(f"""**Distribució de superfície útil**""")
             st.plotly_chart(plotmun_streamlit(bbdd_estudi_hab_mod, selected_mun, "Superfície útil"), use_container_width=True, responsive=True)
 
         st.markdown(f"""
@@ -1788,7 +1817,7 @@ if selected == "Municipis":
             st.plotly_chart(dormscount_plot_mun(bbdd_estudi_hab_mod, selected_mun), use_container_width=True, responsive=True)
 
         with right_col:
-            st.markdown("""**Habitatges a la venda segons número de Banys i lavabos**""")
+            st.markdown("""**Habitatges a la venda segons número de banys i lavabos**""")
             st.plotly_chart(lavcount_plot_mun(bbdd_estudi_hab_mod, selected_mun), use_container_width=True, responsive=True)
 
 
@@ -1864,7 +1893,7 @@ if selected == "Municipis":
                     table61_hab["Total dormitoris"].values[0], table61_lav["Banys i lavabos"].values[0]])
 
         st.markdown(f"""Els resultats de l'estudi d'oferta de nova construcció del 1S2023 pel municipi de {selected_mun} mostren que el preu mitjà dels habitatges en venda es troba 
-        en {data_text(selected_mun)[0]} € amb una superfície mitjana útil de {data_text(selected_mun)[1]} m2. Per tant, el preu per m2 útil es troba en {data_text(selected_mun)[2]} € de mitjana. Per tipologies, els habitatges plurifamiliars
+        en {data_text(selected_mun)[0]} € amb una superfície mitjana útil de {data_text(selected_mun)[1]} m\u00b2. Per tant, el preu per m\u00b2 útil es troba en {data_text(selected_mun)[2]} € de mitjana. Per tipologies, els habitatges plurifamiliars
         representen el {data_text(selected_mun)[3]}% sobre el total d'habitatges, la resta corresponen a habitatges unifamiliars. L'habitatge modal o més freqüent de nova construcció té {data_text(selected_mun)[4][0]} habitacions i {data_text(selected_mun)[5].lower()}.""")
 
         def plotmun_streamlit(data, selected_mun, kpi):
@@ -1880,7 +1909,7 @@ if selected == "Municipis":
 
         left_col, right_col = st.columns((1, 1))
         with left_col:
-            st.markdown(f"""**Distribució de Preus per m2 útil**""")
+            st.markdown(f"""**Distribució de Preus per m\u00b2 útil**""")
             st.plotly_chart(plotmun_streamlit(bbdd_estudi_hab_mod_2023, selected_mun,"Preu m2 útil"), use_container_width=True, responsive=True)
         with right_col:
             st.markdown(f"""**Distribució de Superfície útil**""")
@@ -1977,7 +2006,7 @@ if selected == "Municipis":
             st.plotly_chart(plot_mun_hist(selected_mun, 'Superfície mitjana (m² útils)', min_year, max_year), use_container_width=True, responsive=True)
         left_col, right_col = st.columns((1, 1))
         with left_col:
-            st.markdown("""**Evolució del preu de venda per m2 útil  per tipologia d'habitatge**""")
+            st.markdown("""**Evolució del preu de venda per m\u00b2 útil  per tipologia d'habitatge**""")
             st.plotly_chart(plot_mun_hist(selected_mun, "Preu de venda per m² útil (€)", min_year, max_year), use_container_width=True, responsive=True)
         with right_col:
             st.markdown("""**Evolució del preu venda mitjà per tipologia d'habitatge**""")
@@ -2005,7 +2034,7 @@ if selected=="Districtes de Barcelona":
                     oferta disminueix fins a situar-se en un 25,4% i un 19,5%
                     respectivament. Per barris, aquest comportament evidencia
                     encara més les diferències: a Sant Antoni, Can
-                    Baró, Porta, la Maternitat i Sant Ramón, Vallvidrera, el
+                    Baró, Porta, la Maternitat i Sant Ramon, Vallvidrera, el
                     Tibidabo i les Planes, el Turó de la Peira, Verdun, Prosperitat
                     i la Trinitat Vella resten per vendre la totalitat dels
                     habitatges, o la Font de la Guatlla, Sants, Sant Pere,
@@ -2019,7 +2048,7 @@ if selected=="Districtes de Barcelona":
                     es troben en alguna fase constructiva.
                     L’oferta dels habitatges a la venda es concentra en la tipologia
                     de 2 dormitoris (41,7%) i de 3 dormitoris (35,5%),
-                    reduint-se al 12,0% els d’1 dormitori i al 8,1% als de 4
+                    reduint-se al 12,0% els d’1 dormitori i al 8,1% els de 4
                     dormitoris. Encara en percentatges menors es situen
                     l’1,8% d’habitatges tipus loft i el 0,9% d’habitatges de
                     cinc o més dormitoris.
@@ -2038,7 +2067,7 @@ if selected=="Districtes de Barcelona":
                     rehabilitació integral: Sant Pere, Santa Caterina i la Ribera,
                     l’antiga Esquerra de l’Eixample, la Maternitat i Sant
                     Ramon i el Poble Sec. Destacar també l’alt percentatge
-                    de promocions de rehabilitació integral a el Barri Gòtic,
+                    de promocions de rehabilitació integral al Barri Gòtic,
                     la Dreta de l’Eixample i el Raval.
                     El ventall entre els 1.390 habitatges en oferta respecte
                     a la superfície, el preu, i el preu per metre quadrat
@@ -2048,7 +2077,7 @@ if selected=="Districtes de Barcelona":
                     (10.771€), i el preu mitjà mínim s’obté a Sant Andreu
                     (5.254€) i a Nou Barris (4.986€).
                     Així, la mitjana dels habitatges a la venda al municipi
-                    de Barcelona és de 80,9m2 de superfície útil, amb un
+                    de Barcelona és de 80,9m\u00b2 de superfície útil, amb un
                     preu de 630.559€ i un preu mitjà del metre quadrat útil
                     de 7.487€.""")
         st.subheader(f"{selected_dis.upper()}")
@@ -2059,11 +2088,11 @@ if selected=="Districtes de Barcelona":
             table61_lav = bbdd_estudi_hab[(bbdd_estudi_hab_mod["Municipi"]=="Barcelona") & (bbdd_estudi_hab_mod["Nom DIST"]==selected_dis)].groupby(['Banys i lavabos']).size().reset_index(name='Proporcions').sort_values(by="Proporcions", ascending=False)
 
             return([round(table80_mun["Preu mitjà"].values[0][0],2), round(table80_mun["Superfície útil"].values[0][0],2), 
-                    round(table80_mun["Preu m2 útil"].values[0][0],2), round(table25_mun[table25_mun["TIPOG"]=="Habitatges Plurifamiliars"]["Proporció"].values[0]*100,2), 
+                    round(table80_mun["Preu m2 útil"].values[0][0],2), round(table25_mun[table25_mun["TIPOG"]=="Habitatges plurifamiliars"]["Proporció"].values[0]*100,2), 
                     table61_hab["Total dormitoris"].values[0], table61_lav["Banys i lavabos"].values[0]])
 
-        st.markdown(f"""Els resultats de l'estudi d'oferta de nova construcció de 2022 pel districte de {selected_dis} de la ciutat de Barcelona mostren que el preu mitjà dels habitatges en venda es troba 
-        en {data_text(selected_dis)[0]} € amb una superfície mitjana útil de {data_text(selected_dis)[1]} m2. Per tant, el preu per m2 útil es troba en {data_text(selected_dis)[2]} € de mitjana. Per tipologies, els habitatges plurifamiliars
+        st.markdown(f"""Els resultats de l'Estudi d'Oferta de Nova Construcció de 2022 pel districte de {selected_dis} de la ciutat de Barcelona mostren que el preu mitjà dels habitatges en venda es troba 
+        en {data_text(selected_dis)[0]} € amb una superfície mitjana útil de {data_text(selected_dis)[1]} m\u00b2. Per tant, el preu per m\u00b2 útil es troba en {data_text(selected_dis)[2]} € de mitjana. Per tipologies, els habitatges plurifamiliars
         representen el {data_text(selected_dis)[3]}% sobre el total d'habitatges. L'habitatge modal o més freqüent de nova construcció té {data_text(selected_dis)[4]} habitacions i {data_text(selected_dis)[5]} banys o lavabos.""")
         def plotdis_streamlit(data, selected_dis, kpi):
             df = data[(data['Nom DIST']==selected_dis)]
@@ -2078,10 +2107,10 @@ if selected=="Districtes de Barcelona":
         
         left_col, right_col = st.columns((1, 1))
         with left_col:
-            st.markdown(f"""**Distribució de Preus per m2 útil**""")
+            st.markdown(f"""**Distribució de preus per m\u00b2 útil**""")
             st.plotly_chart(plotdis_streamlit(bbdd_estudi_hab_mod, selected_dis,"Preu m2 útil"), use_container_width=True, responsive=True)
         with right_col:
-            st.markdown(f"""**Distribució de Superfície útil**""")
+            st.markdown(f"""**Distribució de superfície útil**""")
             st.plotly_chart(plotdis_streamlit(bbdd_estudi_hab_mod, selected_dis, "Superfície útil"), use_container_width=True, responsive=True)
 
         st.markdown(f"""
@@ -2122,7 +2151,7 @@ if selected=="Districtes de Barcelona":
             st.plotly_chart(dormscount_plot_dis(bbdd_estudi_hab_mod, selected_dis), use_container_width=True, responsive=True)
 
         with right_col:
-            st.markdown("""**Habitatges a la venda segons número de Banys i lavabos**""")
+            st.markdown("""**Habitatges a la venda segons número de banys i lavabos**""")
             st.plotly_chart(lavcount_plot_dis(bbdd_estudi_hab_mod, selected_dis), use_container_width=True, responsive=True)
 
 
@@ -2183,7 +2212,7 @@ if selected=="Districtes de Barcelona":
             st.plotly_chart(plot_dis_hist(selected_dis, 'Superfície mitjana (m² útils)', min_year, max_year), use_container_width=True, responsive=True)
         left_col, right_col = st.columns((1, 1))
         with left_col:
-            st.markdown("""**Evolució del preu de venda per m2 útil  per tipologia d'habitatge**""")
+            st.markdown("""**Evolució del preu de venda per m\u00b2 útil  per tipologia d'habitatge**""")
             st.plotly_chart(plot_dis_hist(selected_dis, "Preu de venda per m² útil (€)", min_year, max_year), use_container_width=True, responsive=True)
         with right_col:
             st.markdown("""**Evolució del preu venda mitjà per tipologia d'habitatge**""")
@@ -2201,11 +2230,11 @@ if selected=="Districtes de Barcelona":
                     La oferta més baixa d’habitatges coincideix amb la de promocions: Nou Barris amb 48 habitatges en oferta i Les Corts amb 18 habitatges.
                     En el cas de la ciutat de Barcelona, les tipologies amb més oferta són les de 2 dormitoris amb un 41,9% i les de 3 dormitoris amb un 35,7% (al conjunt de Catalunya l’oferta de 3 dormitoris és superior a la de 2 dormitoris). 
                     Cal destacar que a la ciutat de Barcelona més de tres quartes parts de l’oferta correspon a habitatges de 2 o 3 dormitoris (77,6%).
-                    La superfície mitjana dels habitatges a la venda és de 79,5 m2, amb un descens del -1,7% en relació a finals de 2022 (80,9 m2). 
+                    La superfície mitjana dels habitatges a la venda és de 79,5 m\u00b2, amb un descens del -1,7% en relació a finals de 2022 (80,9 m\u00b2). 
                     Aquesta variació no és homogènia en tots els districtes i, en els extrems trobem diferències molt importants. D’aquesta manera la superfície dels habitatges a la venda en Les Corts ha baixat un -23,1%, mentre que en Nou Barris s’ha incrementat un 2,7%.
                     El preu mitjà de l’habitatge a la venda a la ciutat de Barcelona és de 620.495 €, un -1,6% en relació a finals de 2022 (630.559 €). 
                     En el districte de Les Corts és on es produeix un descens més important, un -19,2%. Destaquen també les pujades de preu a Horta-Guinardó i Nou Barris, d’un 4,5%. 
-                    Pel que fa al preu per m2 útil, és de 7.465 €, valor que suposa una variació mínima de -0,3% en relació a 2022 (7.487 €).
+                    Pel que fa al preu per m\u00b2 útil, és de 7.465 €, valor que suposa una variació mínima de -0,3% en relació a 2022 (7.487 €).
                     """)
         st.subheader(f"{selected_dis.upper()}")
         def data_text(selected_dis):
@@ -2215,11 +2244,11 @@ if selected=="Districtes de Barcelona":
             table61_lav = bbdd_estudi_hab_mod_2023[(bbdd_estudi_hab_mod_2023["Municipi"]=="Barcelona") & (bbdd_estudi_hab_mod_2023["Nom DIST"]==selected_dis)].groupby(['Banys i lavabos']).size().reset_index(name='Proporcions').sort_values(by="Proporcions", ascending=False)
 
             return([round(table80_mun["Preu mitjà"].values[0][0],2), round(table80_mun["Superfície útil"].values[0][0],2), 
-                    round(table80_mun["Preu m2 útil"].values[0][0],2), round(table25_mun[table25_mun["TIPOG"]=="Habitatges Plurifamiliars"]["Proporció"].values[0]*100,2), 
+                    round(table80_mun["Preu m2 útil"].values[0][0],2), round(table25_mun[table25_mun["TIPOG"]=="Habitatges plurifamiliars"]["Proporció"].values[0]*100,2), 
                     table61_hab["Total dormitoris"].values[0], table61_lav["Banys i lavabos"].values[0]])
 
         st.markdown(f"""Els resultats de l'estudi d'oferta de nova construcció del 1S2023 pel districte de {selected_dis} de la ciutat de Barcelona mostren que el preu mitjà dels habitatges en venda es troba 
-        en {data_text(selected_dis)[0]} € amb una superfície mitjana útil de {data_text(selected_dis)[1]} m2. Per tant, el preu per m2 útil es troba en {data_text(selected_dis)[2]} € de mitjana. Per tipologies, els habitatges plurifamiliars
+        en {data_text(selected_dis)[0]} € amb una superfície mitjana útil de {data_text(selected_dis)[1]} m\u00b2. Per tant, el preu per m\u00b2 útil es troba en {data_text(selected_dis)[2]} € de mitjana. Per tipologies, els habitatges plurifamiliars
         representen el {data_text(selected_dis)[3]}% sobre el total d'habitatges. L'habitatge modal o més freqüent de nova construcció té {data_text(selected_dis)[4]} habitacions i {data_text(selected_dis)[5]} banys o lavabos.""")
         def plotdis_streamlit(data, selected_dis, kpi):
             df = data[(data['Nom DIST']==selected_dis)]
@@ -2234,7 +2263,7 @@ if selected=="Districtes de Barcelona":
         
         left_col, right_col = st.columns((1, 1))
         with left_col:
-            st.markdown(f"""**Distribució de Preus per m2 útil**""")
+            st.markdown(f"""**Distribució de Preus per m\u00b2 útil**""")
             st.plotly_chart(plotdis_streamlit(bbdd_estudi_hab_mod_2023, selected_dis,"Preu m2 útil"), use_container_width=True, responsive=True)
         with right_col:
             st.markdown(f"""**Distribució de Superfície útil**""")
@@ -2339,7 +2368,7 @@ if selected=="Districtes de Barcelona":
             st.plotly_chart(plot_dis_hist(selected_dis, 'Superfície mitjana (m² útils)', min_year, max_year), use_container_width=True, responsive=True)
         left_col, right_col = st.columns((1, 1))
         with left_col:
-            st.markdown("""**Evolució del preu de venda per m2 útil  per tipologia d'habitatge**""")
+            st.markdown("""**Evolució del preu de venda per m\u00b2 útil  per tipologia d'habitatge**""")
             st.plotly_chart(plot_dis_hist(selected_dis, "Preu de venda per m² útil (€)", min_year, max_year), use_container_width=True, responsive=True)
         with right_col:
             st.markdown("""**Evolució del preu venda mitjà per tipologia d'habitatge**""")
@@ -2354,7 +2383,7 @@ if selected=="Contacte":
     <form action="https://formsubmit.co/{CONTACT_EMAIL}" method="POST">
         <input type="hidden" name="_captcha" value="false">
         <input type="text" name="name" placeholder="Nom" required>
-        <input type="email" name="email" placeholder="Correu electrónic" required>
+        <input type="email" name="email" placeholder="Correu electrònic" required>
         <textarea name="message" placeholder="La teva consulta aquí"></textarea>
         <button type="submit" class="button">Enviar ✉</button>
     </form>
