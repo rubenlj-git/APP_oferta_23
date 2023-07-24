@@ -1012,7 +1012,7 @@ if selected == "Catalunya":
                     augment d’un 2,0% pel que fa a preu m\u00b2 útil.
                 </p>
                 <p>
-                    En aquest sentit, cal recordar que l’evolució de l’IPC en
+                    En aquest sentit, cal recordar que l’evolució de l’IPC a
                     l’exercici 2022 ha estat del 8%.
                 </p>""",
                 unsafe_allow_html=True
