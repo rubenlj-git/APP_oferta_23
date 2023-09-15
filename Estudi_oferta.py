@@ -571,9 +571,6 @@ bbdd_estudi_prom_2023, bbdd_estudi_hab_2023, bbdd_estudi_hab_mod_2023 = tidy_bbd
 
 @st.cache_data(ttl=0.5*3600)
 def import_hist_mun():
-    mun_2017_2018 = pd.read_excel(path + "Resum 2017 - 2018.xlsx", sheet_name="Municipis 2017-2018")
-    mun_2018 = mun_2017_2018.iloc[:,14:27]
-
     mun_2018_2019 = pd.read_excel(path + "Resum 2018 - 2019.xlsx", sheet_name="Municipis 2018-2019")
     mun_2019 = mun_2018_2019.iloc[:,14:27]
 
@@ -593,16 +590,13 @@ def import_hist_mun():
 
     maestro_estudi = pd.read_excel(path + "Maestro estudi_oferta.xlsx", sheet_name="Maestro")
 
-    return([mun_2018, mun_2019, mun_2020, mun_2021, mun_2022, mun_2023, maestro_estudi])
-mun_2018, mun_2019, mun_2020, mun_2021, mun_2022, mun_2023, maestro_estudi = import_hist_mun()
+    return([mun_2019, mun_2020, mun_2021, mun_2022, mun_2023, maestro_estudi])
+mun_2019, mun_2020, mun_2021, mun_2022, mun_2023, maestro_estudi = import_hist_mun()
 
 ############################################################  IMPORTAR HISTÓRICO DE DISTRITOS DE BCN 2016 - 2022 ################################################
 
 @st.cache_data(ttl=0.5*3600)
 def import_hist_dis():
-    dis_2017_2018 = pd.read_excel(path + "Resum 2017 - 2018.xlsx", sheet_name="BCN+districtes+barris 2017-2018")
-    dis_2018 = dis_2017_2018.iloc[:,14:27]
-
     dis_2018_2019 = pd.read_excel(path + "Resum 2018 - 2019.xlsx", sheet_name="BCN+districtes+barris")
     dis_2019 = dis_2018_2019.iloc[:,14:27]
 
@@ -620,8 +614,8 @@ def import_hist_dis():
     dis_2023 = dis_2023.iloc[:,14:27]
     dis_2023 = dis_2023.dropna(how ='all',axis=0)
 
-    return([dis_2018, dis_2019, dis_2020, dis_2021, dis_2022, dis_2023])
-dis_2018, dis_2019, dis_2020, dis_2021, dis_2022, dis_2023 = import_hist_dis()
+    return([dis_2019, dis_2020, dis_2021, dis_2022, dis_2023])
+dis_2019, dis_2020, dis_2021, dis_2022, dis_2023 = import_hist_dis()
 
 ############################################################  IMPORTAR HISTÓRICO DE DISTRITOS DE BCN 2016 - 2022 ################################################
 
@@ -649,7 +643,7 @@ def weighted_mean(data):
 def geo_mun():
     df_vf_aux = pd.DataFrame()
 
-    for df_frame, year in zip(["mun_2018", "mun_2019", "mun_2020", "mun_2021", "mun_2022", "mun_2023"], [2018, 2019, 2020, 2021, 2022, 2023]):
+    for df_frame, year in zip(["mun_2019", "mun_2020", "mun_2021", "mun_2022", "mun_2023"], [2019, 2020, 2021, 2022, 2023]):
         df_vf_aux = pd.concat([df_vf_aux, tidy_data(eval(df_frame), year)], axis=0)
 
 
@@ -705,7 +699,7 @@ df_vf_aux, df_vf, df_final_cat, df_final, ambits_df, comarques_df, provincia_df 
 
 def geo_dis_long():
     df_vf_aux = pd.DataFrame()
-    for df_frame, year in zip(["dis_2018", "dis_2019", "dis_2020", "dis_2021", "dis_2022", "dis_2023"], [2018, 2019, 2020, 2021, 2022, 2023]):
+    for df_frame, year in zip(["dis_2019", "dis_2020", "dis_2021", "dis_2022", "dis_2023"], [2019, 2020, 2021, 2022, 2023]):
         df_vf_aux = pd.concat([df_vf_aux, tidy_data(eval(df_frame), year)], axis=0)
     df_vf_aux['Variable']= np.where(df_vf_aux['Variable']=="Preu de     venda per      m² útil (€)", "Preu de venda per m² útil (€)", df_vf_aux['Variable'])
     df_vf_aux['Valor'] = pd.to_numeric(df_vf_aux['Valor'], errors='coerce')
@@ -1048,8 +1042,8 @@ if selected == "Catalunya":
                     num_cols = df_cat_n.select_dtypes(include=['float64', 'int']).columns
                     df_cat_n[num_cols] = df_cat_n[num_cols].applymap(lambda x: '{:,.0f}'.format(x).replace(',', '#').replace('.', ',').replace('#', '.'))
                     return(df_cat_n)
-            st.markdown(table_geo_cat(2018, 2023).to_html(), unsafe_allow_html=True)
-            st.markdown(filedownload(table_geo_cat(2018, 2022), f"Estudi_oferta_Catalunya.xlsx"), unsafe_allow_html=True)
+            st.markdown(table_geo_cat(2019, 2023).to_html(), unsafe_allow_html=True)
+            st.markdown(filedownload(table_geo_cat(2019, 2022), f"Estudi_oferta_Catalunya.xlsx"), unsafe_allow_html=True)
 ############################################################  CATALUNYA: 2023 ################################################
     if selected_edition=="2023":
         index_names = ["Introducció","Característiques", "Superfície i preus", "Comparativa 2023-2022"]
@@ -1281,8 +1275,8 @@ if selected == "Catalunya":
                 num_cols = df_cat_n.select_dtypes(include=['float64', 'int']).columns
                 df_cat_n[num_cols] = df_cat_n[num_cols].applymap(lambda x: '{:,.0f}'.format(x).replace(',', '#').replace('.', ',').replace('#', '.'))
                 return(df_cat_n)
-            st.markdown(table_geo_cat(2018, 2023).to_html(), unsafe_allow_html=True)
-            st.markdown(filedownload(table_geo_cat(2018, 2022), f"Estudi_oferta_Catalunya.xlsx"), unsafe_allow_html=True)
+            st.markdown(table_geo_cat(2019, 2023).to_html(), unsafe_allow_html=True)
+            st.markdown(filedownload(table_geo_cat(2019, 2022), f"Estudi_oferta_Catalunya.xlsx"), unsafe_allow_html=True)
 
 ############################################################  PROVÍNCIES I ÀMBITS TERRITORIALS ################################################
 
@@ -1320,7 +1314,7 @@ if selected == "Províncies i àmbits":
         if selected_option=="Àmbits territorials":
             selected_geo = st.sidebar.selectbox('', ambit_names, index= ambit_names.index("Metropolità"))
             st.title(f"{selected_geo}")
-            min_year, max_year = st.sidebar.slider("**Interval d'anys de la mostra**", value=[2018, 2022], min_value=2018, max_value=2022)
+            min_year, max_year = st.sidebar.slider("**Interval d'anys de la mostra**", value=[2019, 2022], min_value=2019, max_value=2022)
             st.markdown(table_geo(selected_geo, min_year, max_year, selected_option).to_html(), unsafe_allow_html=True)
             st.markdown(filedownload(table_geo(selected_geo, min_year, max_year, selected_option), f"Estudi_oferta_{selected_geo}.xlsx"), unsafe_allow_html=True)
         if selected_option=="Províncies":
@@ -1410,7 +1404,7 @@ if selected == "Províncies i àmbits":
                             percentatge d’habitatges que restaven per vendre és del
                             44,8% sobre un total de 707 habitatges existents a les
                             promocions a la província.""")
-            min_year, max_year = st.sidebar.slider("**Interval d'anys de la mostra**", value=[2018, 2022], min_value=2018, max_value=2022)
+            min_year, max_year = st.sidebar.slider("**Interval d'anys de la mostra**", value=[2019, 2022], min_value=2019, max_value=2022)
             st.markdown(table_geo(selected_geo, min_year, max_year, selected_option).to_html(), unsafe_allow_html=True)
             st.markdown(filedownload(table_geo(selected_geo, min_year, max_year, selected_option), f"Estudi_oferta_{selected_geo}.xlsx"), unsafe_allow_html=True)
             def tipog_donut(prov):
@@ -1592,13 +1586,13 @@ if selected == "Províncies i àmbits":
         if selected_option=="Àmbits territorials":
             selected_geo = st.sidebar.selectbox('', ambit_names, index= ambit_names.index("Metropolità"))
             st.title(f"{selected_geo}")
-            min_year, max_year = st.sidebar.slider("**Interval d'anys de la mostra**", value=[2018, 2023], min_value=2018, max_value=2023)
+            min_year, max_year = st.sidebar.slider("**Interval d'anys de la mostra**", value=[2019, 2023], min_value=2019, max_value=2023)
             st.markdown(table_geo(selected_geo, min_year, max_year, selected_option).to_html(), unsafe_allow_html=True)
             st.markdown(filedownload(table_geo(selected_geo, min_year, max_year, selected_option), f"Estudi_oferta_{selected_geo}.xlsx"), unsafe_allow_html=True)
         if selected_option=="Províncies":
             selected_geo = st.sidebar.selectbox('', prov_names, index= prov_names.index("Barcelona"))
             st.title(f"PROVÍNCIA DE {selected_geo.upper()}")
-            min_year, max_year = st.sidebar.slider("**Interval d'anys de la mostra**", value=[2018, 2023], min_value=2018, max_value=2023)
+            min_year, max_year = st.sidebar.slider("**Interval d'anys de la mostra**", value=[2019, 2023], min_value=2019, max_value=2023)
             st.markdown(table_geo(selected_geo, min_year, max_year, selected_option).to_html(), unsafe_allow_html=True)
             st.markdown(filedownload(table_geo(selected_geo, min_year, max_year, selected_option), f"Estudi_oferta_{selected_geo}.xlsx"), unsafe_allow_html=True)
             def tipog_donut(prov):
@@ -1839,7 +1833,7 @@ if selected == "Municipis":
             return(df_mun_n)
         left_col, right_col = st.columns((1,1))
         with left_col:
-            min_year, max_year = st.sidebar.slider("**Interval d'anys de la mostra:**", value=[2018, 2022], min_value=2018, max_value=2022)
+            min_year, max_year = st.sidebar.slider("**Interval d'anys de la mostra:**", value=[2019, 2022], min_value=2019, max_value=2022)
         st.markdown(table_mun(selected_mun, min_year, max_year).to_html(), unsafe_allow_html=True)
         st.markdown(filedownload(table_mun(selected_mun, min_year, max_year), f"Estudi_oferta_{selected_mun}.xlsx"), unsafe_allow_html=True)
         st.markdown("")
@@ -1978,7 +1972,7 @@ if selected == "Municipis":
             return(df_mun_n)
         left_col, right_col = st.columns((1,1))
         with left_col:
-            min_year, max_year = st.sidebar.slider("**Interval d'anys de la mostra:**", value=[2018, 2023], min_value=2018, max_value=2023)
+            min_year, max_year = st.sidebar.slider("**Interval d'anys de la mostra:**", value=[2019, 2023], min_value=2019, max_value=2023)
         st.markdown(table_mun(selected_mun, min_year, max_year).to_html(), unsafe_allow_html=True)
         st.markdown(filedownload(table_mun(selected_mun, min_year, max_year), f"Estudi_oferta_{selected_mun}.xlsx"), unsafe_allow_html=True)
         st.markdown("")
@@ -2158,7 +2152,7 @@ if selected=="Districtes de Barcelona":
         st.header(f"Comparativa amb anys anteriors: Districte de {selected_dis}")
         def geo_dis(districte, any_ini, any_fin):
             df_vf_aux = pd.DataFrame()
-            for df_frame, year in zip(["dis_2018", "dis_2019", "dis_2020", "dis_2021", "dis_2022"], [2018, 2019, 2020, 2021, 2022]):
+            for df_frame, year in zip(["dis_2019", "dis_2020", "dis_2021", "dis_2022"], [2019, 2020, 2021, 2022]):
                 df_vf_aux = pd.concat([df_vf_aux, tidy_data(eval(df_frame), year)], axis=0)
             df_vf_aux['Variable']= np.where(df_vf_aux['Variable']=="Preu de     venda per      m² útil (€)", "Preu de venda per m² útil (€)", df_vf_aux['Variable'])
             df_vf_aux['Valor'] = pd.to_numeric(df_vf_aux['Valor'], errors='coerce')
@@ -2180,7 +2174,7 @@ if selected=="Districtes de Barcelona":
             return(df_wide)
         left_col, right_col = st.columns((1,1))
         with left_col:
-            min_year, max_year = st.sidebar.slider("**Interval d'anys de la mostra:**", value=[2018, 2022], min_value=2018, max_value=2022)
+            min_year, max_year = st.sidebar.slider("**Interval d'anys de la mostra:**", value=[2019, 2022], min_value=2019, max_value=2022)
         st.markdown(geo_dis(selected_dis, min_year, max_year).to_html(), unsafe_allow_html=True)
         st.markdown(filedownload(geo_dis(selected_dis, min_year, max_year), f"Estudi_oferta_{selected_dis}.xlsx"), unsafe_allow_html=True)
         def plot_dis_hist_units(selected_dis, variable_int, any_ini, any_fin):
@@ -2314,7 +2308,7 @@ if selected=="Districtes de Barcelona":
         st.header(f"Comparativa amb anys anteriors: Districte de {selected_dis}")
         def geo_dis(districte, any_ini, any_fin):
             df_vf_aux = pd.DataFrame()
-            for df_frame, year in zip(["dis_2018", "dis_2019", "dis_2020", "dis_2021", "dis_2022", "dis_2023"], [2018, 2019, 2020, 2021, 2022, 2023]):
+            for df_frame, year in zip(["dis_2019", "dis_2020", "dis_2021", "dis_2022", "dis_2023"], [2019, 2020, 2021, 2022, 2023]):
                 df_vf_aux = pd.concat([df_vf_aux, tidy_data(eval(df_frame), year)], axis=0)
             df_vf_aux['Variable']= np.where(df_vf_aux['Variable']=="Preu de     venda per      m² útil (€)", "Preu de venda per m² útil (€)", df_vf_aux['Variable'])
             df_vf_aux['Valor'] = pd.to_numeric(df_vf_aux['Valor'], errors='coerce')
@@ -2336,7 +2330,7 @@ if selected=="Districtes de Barcelona":
             return(df_wide)
         left_col, right_col = st.columns((1,1))
         with left_col:
-            min_year, max_year = st.sidebar.slider("**Interval d'anys de la mostra:**", value=[2018, 2023], min_value=2018, max_value=2023)
+            min_year, max_year = st.sidebar.slider("**Interval d'anys de la mostra:**", value=[2019, 2023], min_value=2019, max_value=2023)
         st.markdown(geo_dis(selected_dis, min_year, max_year).to_html(), unsafe_allow_html=True)
         st.markdown(filedownload(geo_dis(selected_dis, min_year, max_year), f"Estudi_oferta_{selected_dis}.xlsx"), unsafe_allow_html=True)
         def plot_dis_hist_units(selected_dis, variable_int, any_ini, any_fin):
