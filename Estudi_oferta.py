@@ -96,7 +96,7 @@ def tidy_bbdd(any):
     bbdd_estudi_prom = pd.read_excel(path + 'BBDD 2022_2021 03.02.23.xlsx', sheet_name='Promocions 2022_2021')
     bbdd_estudi_prom.columns = bbdd_estudi_prom.iloc[0,:]
     bbdd_estudi_prom = bbdd_estudi_prom[bbdd_estudi_prom["ESTUDI"]==any]
-    bbdd_estudi_prom['TIPO_aux'] = np.where(bbdd_estudi_prom['TIPO'].isin([1,2]), 'Habitatges Unifamiliars', 'Habitatges Plurifamiliars')
+    bbdd_estudi_prom['TIPO_aux'] = np.where(bbdd_estudi_prom['TIPO'].isin([1,2]), 'Habitatges unifamiliars', 'Habitatges plurifamiliars')
 
     mapping = {1: 'Unifamiliars aïllats', 
             2: 'Unifamiliars adossats', 
@@ -335,7 +335,7 @@ def tidy_bbdd_semestral(any):
     bbdd_estudi_prom = pd.read_excel(path + 'Promos_Habitatge_2023.xlsx', sheet_name='Promocions 2023')
     bbdd_estudi_prom.columns = bbdd_estudi_prom.iloc[0,:]
     bbdd_estudi_prom = bbdd_estudi_prom[bbdd_estudi_prom["ESTUDI"]==any]
-    bbdd_estudi_prom['TIPO_aux'] = np.where(bbdd_estudi_prom['TIPO'].isin([1,2]), 'Habitatges Unifamiliars', 'Habitatges Plurifamiliars')
+    bbdd_estudi_prom['TIPO_aux'] = np.where(bbdd_estudi_prom['TIPO'].isin([1,2]), 'Habitatges unifamiliars', 'Habitatges plurifamiliars')
 
     mapping = {1: 'Unifamiliars aïllats', 
             2: 'Unifamiliars adossats', 
@@ -1738,8 +1738,9 @@ if selected == "Municipis":
             table25_mun = bbdd_estudi_hab[bbdd_estudi_hab_mod["Municipi"]==selected_mun][["Municipi", "TIPOG"]].value_counts(normalize=True).reset_index().rename(columns={0:"Proporció"})
             table61_hab = bbdd_estudi_hab[bbdd_estudi_hab_mod["Municipi"]==selected_mun].groupby(['Total dormitoris']).size().reset_index(name='Proporcions').sort_values(by="Proporcions", ascending=False)
             table61_lav = bbdd_estudi_hab[bbdd_estudi_hab_mod["Municipi"]==selected_mun].groupby(['Banys i lavabos']).size().reset_index(name='Proporcions').sort_values(by="Proporcions", ascending=False)
+
             try:
-                proporcio_tipo = round(table25_mun[table25_mun["TIPOG"]=="Habitatges Plurifamiliars"]["Proporció"].values[0]*100,2)
+                proporcio_tipo = round(table25_mun[table25_mun["TIPOG"]=="Habitatges plurifamiliars"]["Proporció"].values[0]*100,2)
             except IndexError:
                 proporcio_tipo = 0
 
@@ -1873,12 +1874,12 @@ if selected == "Municipis":
         selected_mun = st.sidebar.selectbox('**Municipi seleccionat:**', mun_names, index= mun_names.index("Barcelona"))
         st.subheader(f"MUNICIPI DE {selected_mun.upper()}")
         def data_text(selected_mun):
-            table80_mun = bbdd_estudi_hab_mod_2023[bbdd_estudi_hab_mod_2023["Municipi"]==selected_mun][["Municipi", "TIPOG", "Superfície útil", "Preu mitjà", "Preu m2 útil"]].groupby(["Municipi"]).agg({"Municipi":['count'], "Superfície útil": [np.mean], "Preu mitjà": [np.mean], "Preu m2 útil": [np.mean]}).reset_index()
-            table25_mun = bbdd_estudi_hab_mod_2023[bbdd_estudi_hab_mod_2023["Municipi"]==selected_mun][["Municipi", "TIPOG"]].value_counts(normalize=True).reset_index().rename(columns={0:"Proporció"})
-            table61_hab = bbdd_estudi_hab_mod_2023[bbdd_estudi_hab_mod_2023["Municipi"]==selected_mun].groupby(['Total dormitoris']).size().reset_index(name='Proporcions').sort_values(by="Proporcions", ascending=False)
-            table61_lav = bbdd_estudi_hab_mod_2023[bbdd_estudi_hab_mod_2023["Municipi"]==selected_mun].groupby(['Banys i lavabos']).size().reset_index(name='Proporcions').sort_values(by="Proporcions", ascending=False)
+            table80_mun = bbdd_estudi_hab_2023[bbdd_estudi_hab_2023["Municipi"]==selected_mun][["Municipi", "TIPOG", "Superfície útil", "Preu mitjà", "Preu m2 útil"]].groupby(["Municipi"]).agg({"Municipi":['count'], "Superfície útil": [np.mean], "Preu mitjà": [np.mean], "Preu m2 útil": [np.mean]}).reset_index()
+            table25_mun = bbdd_estudi_hab_2023[bbdd_estudi_hab_2023["Municipi"]==selected_mun][["Municipi", "TIPOG"]].value_counts(normalize=True).reset_index().rename(columns={0:"Proporció"})
+            table61_hab = bbdd_estudi_hab_2023[bbdd_estudi_hab_2023["Municipi"]==selected_mun].groupby(['Total dormitoris']).size().reset_index(name='Proporcions').sort_values(by="Proporcions", ascending=False)
+            table61_lav = bbdd_estudi_hab_2023[bbdd_estudi_hab_2023["Municipi"]==selected_mun].groupby(['Banys i lavabos']).size().reset_index(name='Proporcions').sort_values(by="Proporcions", ascending=False)
             try:
-                proporcio_tipo = round(table25_mun[table25_mun["TIPOG"]=="Habitatges Plurifamiliars"]["Proporció"].values[0]*100,2)
+                proporcio_tipo = round(table25_mun[table25_mun["TIPOG"]=="Habitatges plurifamiliars"]["Proporció"].values[0]*100,2)
             except IndexError:
                 proporcio_tipo = 0
 
@@ -1888,7 +1889,7 @@ if selected == "Municipis":
 
         st.markdown(f"""Els resultats de l'estudi d'oferta de nova construcció del 1S2023 pel municipi de {selected_mun} mostren que el preu mitjà dels habitatges en venda es troba 
         en {data_text(selected_mun)[0]} € amb una superfície mitjana útil de {data_text(selected_mun)[1]} m\u00b2. Per tant, el preu per m\u00b2 útil es troba en {data_text(selected_mun)[2]} € de mitjana. Per tipologies, els habitatges plurifamiliars
-        representen el {data_text(selected_mun)[3]}% sobre el total d'habitatges, la resta corresponen a habitatges unifamiliars. L'habitatge modal o més freqüent de nova construcció té {data_text(selected_mun)[4][0]} habitacions i {data_text(selected_mun)[5].lower()}.""")
+        representen el {data_text(selected_mun)[3]}% sobre el total d'habitatges, la resta corresponen a habitatges unifamiliars. L'habitatge modal o més freqüent de nova construcció té {data_text(selected_mun)[4]} habitacions i {data_text(selected_mun)[5]} banys o lavabos.""")
 
         def plotmun_streamlit(data, selected_mun, kpi):
             df = data[(data['Municipi']==selected_mun)]
@@ -2076,13 +2077,13 @@ if selected=="Districtes de Barcelona":
                     de 7.487€.""")
         st.subheader(f"{selected_dis.upper()}")
         def data_text(selected_dis):
-            table80_mun = bbdd_estudi_hab_mod[(bbdd_estudi_hab_mod["Municipi"]=="Barcelona") & (bbdd_estudi_hab_mod["Nom DIST"]==selected_dis)][["Nom DIST", "TIPOG", "Superfície útil", "Preu mitjà", "Preu m2 útil"]].groupby(["Nom DIST"]).agg({"Nom DIST":['count'], "Superfície útil": [np.mean], "Preu mitjà": [np.mean], "Preu m2 útil": [np.mean]}).reset_index()
-            table25_mun = bbdd_estudi_hab[(bbdd_estudi_hab_mod["Municipi"]=="Barcelona") & (bbdd_estudi_hab_mod["Nom DIST"]==selected_dis)][["Nom DIST", "TIPOG"]].value_counts(normalize=True).reset_index().rename(columns={0:"Proporció"})
-            table61_hab = bbdd_estudi_hab[(bbdd_estudi_hab_mod["Municipi"]=="Barcelona") & (bbdd_estudi_hab_mod["Nom DIST"]==selected_dis)].groupby(['Total dormitoris']).size().reset_index(name='Proporcions').sort_values(by="Proporcions", ascending=False)
-            table61_lav = bbdd_estudi_hab[(bbdd_estudi_hab_mod["Municipi"]=="Barcelona") & (bbdd_estudi_hab_mod["Nom DIST"]==selected_dis)].groupby(['Banys i lavabos']).size().reset_index(name='Proporcions').sort_values(by="Proporcions", ascending=False)
+            table80_dis = bbdd_estudi_hab[(bbdd_estudi_hab["Municipi"]=="Barcelona") & (bbdd_estudi_hab["Nom DIST"]==selected_dis)][["Nom DIST", "TIPOG", "Superfície útil", "Preu mitjà", "Preu m2 útil"]].groupby(["Nom DIST"]).agg({"Nom DIST":['count'], "Superfície útil": [np.mean], "Preu mitjà": [np.mean], "Preu m2 útil": [np.mean]}).reset_index()
+            table25_dis = bbdd_estudi_hab[(bbdd_estudi_hab["Municipi"]=="Barcelona") & (bbdd_estudi_hab["Nom DIST"]==selected_dis)][["Nom DIST", "TIPOG"]].value_counts(normalize=True).reset_index().rename(columns={0:"Proporció"})
+            table61_hab = bbdd_estudi_hab[(bbdd_estudi_hab["Municipi"]=="Barcelona") & (bbdd_estudi_hab["Nom DIST"]==selected_dis)].groupby(['Total dormitoris']).size().reset_index(name='Proporcions').sort_values(by="Proporcions", ascending=False)
+            table61_lav = bbdd_estudi_hab[(bbdd_estudi_hab["Municipi"]=="Barcelona") & (bbdd_estudi_hab["Nom DIST"]==selected_dis)].groupby(['Banys i lavabos']).size().reset_index(name='Proporcions').sort_values(by="Proporcions", ascending=False)
 
-            return([round(table80_mun["Preu mitjà"].values[0][0],2), round(table80_mun["Superfície útil"].values[0][0],2), 
-                    round(table80_mun["Preu m2 útil"].values[0][0],2), round(table25_mun[table25_mun["TIPOG"]=="Habitatges plurifamiliars"]["Proporció"].values[0]*100,2), 
+            return([round(table80_dis["Preu mitjà"].values[0][0],2), round(table80_dis["Superfície útil"].values[0][0],2), 
+                    round(table80_dis["Preu m2 útil"].values[0][0],2), round(table25_dis[table25_dis["TIPOG"]=="Habitatges plurifamiliars"]["Proporció"].values[0]*100,2), 
                     table61_hab["Total dormitoris"].values[0], table61_lav["Banys i lavabos"].values[0]])
 
         st.markdown(f"""Els resultats de l'Estudi d'Oferta de Nova Construcció de 2022 pel districte de {selected_dis} de la ciutat de Barcelona mostren que el preu mitjà dels habitatges en venda es troba 
@@ -2232,10 +2233,10 @@ if selected=="Districtes de Barcelona":
                     """)
         st.subheader(f"{selected_dis.upper()}")
         def data_text(selected_dis):
-            table80_mun = bbdd_estudi_hab_mod_2023[(bbdd_estudi_hab_mod_2023["Municipi"]=="Barcelona") & (bbdd_estudi_hab_mod_2023["Nom DIST"]==selected_dis)][["Nom DIST", "TIPOG", "Superfície útil", "Preu mitjà", "Preu m2 útil"]].groupby(["Nom DIST"]).agg({"Nom DIST":['count'], "Superfície útil": [np.mean], "Preu mitjà": [np.mean], "Preu m2 útil": [np.mean]}).reset_index()
-            table25_mun = bbdd_estudi_hab_mod_2023[(bbdd_estudi_hab_mod_2023["Municipi"]=="Barcelona") & (bbdd_estudi_hab_mod_2023["Nom DIST"]==selected_dis)][["Nom DIST", "TIPOG"]].value_counts(normalize=True).reset_index().rename(columns={0:"Proporció"})
-            table61_hab = bbdd_estudi_hab_mod_2023[(bbdd_estudi_hab_mod_2023["Municipi"]=="Barcelona") & (bbdd_estudi_hab_mod_2023["Nom DIST"]==selected_dis)].groupby(['Total dormitoris']).size().reset_index(name='Proporcions').sort_values(by="Proporcions", ascending=False)
-            table61_lav = bbdd_estudi_hab_mod_2023[(bbdd_estudi_hab_mod_2023["Municipi"]=="Barcelona") & (bbdd_estudi_hab_mod_2023["Nom DIST"]==selected_dis)].groupby(['Banys i lavabos']).size().reset_index(name='Proporcions').sort_values(by="Proporcions", ascending=False)
+            table80_mun = bbdd_estudi_hab_2023[(bbdd_estudi_hab_2023["Municipi"]=="Barcelona") & (bbdd_estudi_hab_2023["Nom DIST"]==selected_dis)][["Nom DIST", "TIPOG", "Superfície útil", "Preu mitjà", "Preu m2 útil"]].groupby(["Nom DIST"]).agg({"Nom DIST":['count'], "Superfície útil": [np.mean], "Preu mitjà": [np.mean], "Preu m2 útil": [np.mean]}).reset_index()
+            table25_mun = bbdd_estudi_hab_2023[(bbdd_estudi_hab_2023["Municipi"]=="Barcelona") & (bbdd_estudi_hab_2023["Nom DIST"]==selected_dis)][["Nom DIST", "TIPOG"]].value_counts(normalize=True).reset_index().rename(columns={0:"Proporció"})
+            table61_hab = bbdd_estudi_hab_2023[(bbdd_estudi_hab_2023["Municipi"]=="Barcelona") & (bbdd_estudi_hab_2023["Nom DIST"]==selected_dis)].groupby(['Total dormitoris']).size().reset_index(name='Proporcions').sort_values(by="Proporcions", ascending=False)
+            table61_lav = bbdd_estudi_hab_2023[(bbdd_estudi_hab_2023["Municipi"]=="Barcelona") & (bbdd_estudi_hab_2023["Nom DIST"]==selected_dis)].groupby(['Banys i lavabos']).size().reset_index(name='Proporcions').sort_values(by="Proporcions", ascending=False)
 
             return([round(table80_mun["Preu mitjà"].values[0][0],2), round(table80_mun["Superfície útil"].values[0][0],2), 
                     round(table80_mun["Preu m2 útil"].values[0][0],2), round(table25_mun[table25_mun["TIPOG"]=="Habitatges plurifamiliars"]["Proporció"].values[0]*100,2), 
