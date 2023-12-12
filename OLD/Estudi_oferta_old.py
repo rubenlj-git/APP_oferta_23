@@ -329,10 +329,10 @@ def tidy_bbdd(any):
 bbdd_estudi_prom, bbdd_estudi_hab, bbdd_estudi_hab_mod = tidy_bbdd(2022)
 
 
-############################################################  IMPORTAMOS BBDD FINAL 2023 ################################################
+############################################################  IMPORTAMOS BBDD SEMESTRAL 2023 ################################################
 @st.cache_data(ttl=0.5*3600)
 def tidy_bbdd_semestral(any):
-    bbdd_estudi_prom = pd.read_excel(path + 'P3007 BBDD desembre APCE.xlsx', sheet_name='Promocions 2023')
+    bbdd_estudi_prom = pd.read_excel(path + 'Promos_Habitatge_2023.xlsx', sheet_name='Promocions 2023')
     bbdd_estudi_prom.columns = bbdd_estudi_prom.iloc[0,:]
     bbdd_estudi_prom = bbdd_estudi_prom[bbdd_estudi_prom["ESTUDI"]==any]
     bbdd_estudi_prom['TIPO_aux'] = np.where(bbdd_estudi_prom['TIPO'].isin([1,2]), 'Habitatges unifamiliars', 'Habitatges plurifamiliars')
@@ -379,6 +379,7 @@ def tidy_bbdd_semestral(any):
     }
 
 
+    # bbdd_estudi_hab['QENERGC'] = bbdd_estudi_hab['QENERGC'].map(number_to_letter_map)
 
     bbdd_estudi_prom['TIPO'] = bbdd_estudi_prom['TIPO'].map(mapping)
 
@@ -387,13 +388,13 @@ def tidy_bbdd_semestral(any):
 
     bbdd_estudi_prom['ESTO'] = bbdd_estudi_prom['ESTO'].map(mapping2)
 
-    bbdd_estudi_prom['QENERGC'] = bbdd_estudi_prom['QENERGC'].map(mapping3)
+    # bbdd_estudi_prom['QENERGC'] = bbdd_estudi_prom['QENERGC'].map(mapping3)
 
-    bbdd_estudi_prom['APAR'] = bbdd_estudi_prom['APAR'].map(mapping4)
+    # bbdd_estudi_prom['APAR'] = bbdd_estudi_prom['APAR'].map(mapping4)
 
 
     # Importar BBDD habitatges
-    bbdd_estudi_hab = pd.read_excel(path + 'P3007 BBDD desembre APCE.xlsx', sheet_name='Habitatges 2023')
+    bbdd_estudi_hab = pd.read_excel(path + 'Promos_Habitatge_2023.xlsx', sheet_name='Habitatges 2023')
     bbdd_estudi_hab.columns = bbdd_estudi_hab.iloc[0,:]
     bbdd_estudi_hab = bbdd_estudi_hab[bbdd_estudi_hab["ESTUDI"]==any]
 
@@ -407,8 +408,8 @@ def tidy_bbdd_semestral(any):
 
     bbdd_estudi_hab['TIPOG'] = np.where(bbdd_estudi_hab['TIPO'].isin([1,2]), 'Habitatges unifamiliars', 'Habitatges plurifamiliars')
     bbdd_estudi_hab['TIPO'] = bbdd_estudi_hab['TIPO'].map(mapping)
-    bbdd_estudi_hab['QENERGC'] = bbdd_estudi_hab['QENERGC'].map(mapping3)
-    bbdd_estudi_hab['APAR'] = bbdd_estudi_hab['APAR'].map(mapping4)
+    # bbdd_estudi_hab['QENERGC'] = bbdd_estudi_hab['QENERGC'].map(mapping3)
+    # bbdd_estudi_hab['APAR'] = bbdd_estudi_hab['APAR'].map(mapping4)
 
     bbdd_estudi_hab = bbdd_estudi_hab.dropna(axis=1 , how ='all')
 
@@ -442,62 +443,62 @@ def tidy_bbdd_semestral(any):
                                                             "NOMD01S":"Altres exteriors"})
 
 
-    # Canviar de nom tots els equipaments
-    bbdd_estudi_hab = bbdd_estudi_hab.rename(columns = {'EQUIC_1': 'Zona enjardinada', 
-                                                        'EQUIC_2': 'Parc infantil',
-                                                        'EQUIC_3': 'Piscina comunitària', 
-                                                        'EQUIC_4': 'Traster', 
-                                                        'EQUIC_5': 'Ascensor', 
-                                                        'EQUIC_6': 'Equipament Esportiu',  
-                                                        'EQUIC_7': 'Sala de jocs', 
-                                                        'EQUIC_8': 'Sauna', 
-                                                        "EQUIC_9_50": "Altres",
-                                                        'EQUIC_99': 'Cap dels anteriors'})
-    bbdd_estudi_prom = bbdd_estudi_prom.rename(columns = {'EQUIC_1': 'Zona enjardinada', 
-                                                        'EQUIC_2': 'Parc infantil',
-                                                        'EQUIC_3': 'Piscina comunitària', 
-                                                        'EQUIC_4': 'Traster', 
-                                                        'EQUIC_5': 'Ascensor', 
-                                                        'EQUIC_6': 'Equipament Esportiu',  
-                                                        'EQUIC_7': 'Sala de jocs', 
-                                                        'EQUIC_8': 'Sauna', 
-                                                        "QUAL_ALTRES": "Altres",
-                                                        'EQUIC_99': 'Cap dels anteriors'})
-    bbdd_estudi_prom["Ascensor"] = np.where(bbdd_estudi_prom["Ascensor"]>=1, 1, bbdd_estudi_prom["Ascensor"])
-    bbdd_estudi_hab["Ascensor"] = np.where(bbdd_estudi_hab["Ascensor"]>=1, 1, bbdd_estudi_hab["Ascensor"])
+    # # Canviar de nom tots els equipaments
+    # bbdd_estudi_hab = bbdd_estudi_hab.rename(columns = {'EQUIC_1': 'Zona enjardinada', 
+    #                                                     'EQUIC_2': 'Parc infantil',
+    #                                                     'EQUIC_3': 'Piscina comunitària', 
+    #                                                     'EQUIC_4': 'Traster', 
+    #                                                     'EQUIC_5': 'Ascensor', 
+    #                                                     'EQUIC_6': 'Equipament Esportiu',  
+    #                                                     'EQUIC_7': 'Sala de jocs', 
+    #                                                     'EQUIC_8': 'Sauna', 
+    #                                                     "EQUIC_9_50": "Altres",
+    #                                                     'EQUIC_99': 'Cap dels anteriors'})
+    # bbdd_estudi_prom = bbdd_estudi_prom.rename(columns = {'EQUIC_1': 'Zona enjardinada', 
+    #                                                     'EQUIC_2': 'Parc infantil',
+    #                                                     'EQUIC_3': 'Piscina comunitària', 
+    #                                                     'EQUIC_4': 'Traster', 
+    #                                                     'EQUIC_5': 'Ascensor', 
+    #                                                     'EQUIC_6': 'Equipament Esportiu',  
+    #                                                     'EQUIC_7': 'Sala de jocs', 
+    #                                                     'EQUIC_8': 'Sauna', 
+    #                                                     "QUAL_ALTRES": "Altres",
+    #                                                     'EQUIC_99': 'Cap dels anteriors'})
+    # bbdd_estudi_prom["Ascensor"] = np.where(bbdd_estudi_prom["Ascensor"]>=1, 1, bbdd_estudi_prom["Ascensor"])
+    # bbdd_estudi_hab["Ascensor"] = np.where(bbdd_estudi_hab["Ascensor"]>=1, 1, bbdd_estudi_hab["Ascensor"])
 
 
-    # Canviar de nom totes les qualitats
-    bbdd_estudi_hab = bbdd_estudi_hab.rename(columns = {"QUALIC_5": "Aire condicionat", 
-                                                        "QUALIC_6": "Bomba de calor", 
-                                                        "QUALI_A": "Aerotèrmia", 
-                                                        'QUALIC_7':"Calefacció", 
-                                                        'QUALIC_8':"Preinstal·lació d'A.C./B. Calor/Calefacció", 
-                                                        'QUALIC_9': 'Parquet', 
-                                                        'QUALIC_10':'Armaris encastats',
-                                                        'QUALIC_12':'Placa de cocció amb gas',
-                                                        'QUALIC_13':'Placa de cocció vitroceràmica',
-                                                        "QUALIC_14":"Placa d'inducció",
-                                                        'QUALIC_22':'Plaques solars'})
+    # # Canviar de nom totes les qualitats
+    # bbdd_estudi_hab = bbdd_estudi_hab.rename(columns = {"QUALIC_5": "Aire condicionat", 
+    #                                                     "QUALIC_6": "Bomba de calor", 
+    #                                                     "QUALI_A": "Aerotèrmia", 
+    #                                                     'QUALIC_7':"Calefacció", 
+    #                                                     'QUALIC_8':"Preinstal·lació d'A.C./B. Calor/Calefacció", 
+    #                                                     'QUALIC_9': 'Parquet', 
+    #                                                     'QUALIC_10':'Armaris encastats',
+    #                                                     'QUALIC_12':'Placa de cocció amb gas',
+    #                                                     'QUALIC_13':'Placa de cocció vitroceràmica',
+    #                                                     "QUALIC_14":"Placa d'inducció",
+    #                                                     'QUALIC_22':'Plaques solars'})
 
 
-    bbdd_estudi_prom = bbdd_estudi_prom.rename(columns = {"QUALIC_5": "Aire condicionat", 
-                                                        "QUALIC_6": "Bomba de calor", 
-                                                        "QUALI_A": "Aerotèrmia", 
-                                                        'QUALIC_7':"Calefacció", 
-                                                        'QUALIC_8':"Preinstal·lació d'A.C./B. Calor/Calefacció", 
-                                                        'QUALIC_9': 'Parquet', 
-                                                        'QUALIC_10':'Armaris encastats',
-                                                        'QUALIC_12':'Placa de cocció amb gas',
-                                                        'QUALIC_13':'Placa de cocció vitroceràmica',
-                                                        "QUALIC_14":"Placa d'inducció",
-                                                        'QUALIC_22':'Plaques solars'})
-    #  Canviar nom a tipus de calefacció
-    bbdd_estudi_prom = bbdd_estudi_prom.rename(columns = {'CALEFC_3': 'De gasoil', 
-                                                        'CALEFC_4': 'De gas natural', 
-                                                        'CALEFC_5': 'De propà', 
-                                                        'CALEFC_6': "D'electricitat", 
-                                                        'CALEFC_9': "No s'indica tipus"})
+    # bbdd_estudi_prom = bbdd_estudi_prom.rename(columns = {"QUALIC_5": "Aire condicionat", 
+    #                                                     "QUALIC_6": "Bomba de calor", 
+    #                                                     "QUALI_A": "Aerotèrmia", 
+    #                                                     'QUALIC_7':"Calefacció", 
+    #                                                     'QUALIC_8':"Preinstal·lació d'A.C./B. Calor/Calefacció", 
+    #                                                     'QUALIC_9': 'Parquet', 
+    #                                                     'QUALIC_10':'Armaris encastats',
+    #                                                     'QUALIC_12':'Placa de cocció amb gas',
+    #                                                     'QUALIC_13':'Placa de cocció vitroceràmica',
+    #                                                     "QUALIC_14":"Placa d'inducció",
+    #                                                     'QUALIC_22':'Plaques solars'})
+    # #  Canviar nom a tipus de calefacció
+    # bbdd_estudi_prom = bbdd_estudi_prom.rename(columns = {'CALEFC_3': 'De gasoil', 
+    #                                                     'CALEFC_4': 'De gas natural', 
+    #                                                     'CALEFC_5': 'De propà', 
+    #                                                     'CALEFC_6': "D'electricitat", 
+    #                                                     'CALEFC_9': "No s'indica tipus"})
 
 
 
@@ -507,12 +508,12 @@ def tidy_bbdd_semestral(any):
                                                 np.where(bbdd_estudi_prom['TIPV_3'] >= 1, "Venda directa del promotor", "Sense informació")))
 
 
-    bbdd_estudi_prom['TIPOL_VENDA'] = np.where(bbdd_estudi_prom['TIPOL_VENDA_1'] == 1, "0D",
-                                        np.where(bbdd_estudi_prom['TIPOL_VENDA_2'] == 1, "1D",
-                                                np.where(bbdd_estudi_prom['TIPOL_VENDA_3'] == 1, "2D",
-                                                        np.where(bbdd_estudi_prom['TIPOL_VENDA_4'] == 1, "3D",
-                                                            np.where(bbdd_estudi_prom['TIPOL_VENDA_5'] == 1, "4D", 
-                                                                np.where(bbdd_estudi_prom['TIPOL_VENDA_6'] == 1, "5+D", "NA"))))))
+    # bbdd_estudi_prom['TIPOL_VENDA'] = np.where(bbdd_estudi_prom['TIPOL_VENDA_1'] == 1, "0D",
+    #                                     np.where(bbdd_estudi_prom['TIPOL_VENDA_2'] == 1, "1D",
+    #                                             np.where(bbdd_estudi_prom['TIPOL_VENDA_3'] == 1, "2D",
+    #                                                     np.where(bbdd_estudi_prom['TIPOL_VENDA_4'] == 1, "3D",
+    #                                                         np.where(bbdd_estudi_prom['TIPOL_VENDA_5'] == 1, "4D", 
+    #                                                             np.where(bbdd_estudi_prom['TIPOL_VENDA_6'] == 1, "5+D", "NA"))))))
 
                         
                                                     
@@ -523,24 +524,24 @@ def tidy_bbdd_semestral(any):
     bbdd_estudi_hab['ESTO'] = bbdd_estudi_hab['ESTO'].map(mapping2)
 
 
-    vars = ['Zona enjardinada', 'Parc infantil', 'Piscina comunitària', 
-            'Traster', 'Ascensor', 'Equipament Esportiu', 'Sala de jocs', 
-            'Sauna', 'Altres', "Aire condicionat", "Bomba de calor", 
-            "Aerotèrmia", "Calefacció", "Preinstal·lació d'A.C./B. Calor/Calefacció", 
-            "Parquet", "Armaris encastats", 'Placa de cocció amb gas', 
-            'Placa de cocció vitroceràmica', "Placa d'inducció", 'Plaques solars', "APAR"]
-    vars_aux = ['Zona enjardinada', 'Parc infantil', 'Piscina comunitària', 
-            'Traster', 'Ascensor', 'Equipament Esportiu', 'Sala de jocs', 
-            'Sauna', 'Altres', "Aire condicionat", "Bomba de calor", 
-            "Aerotèrmia", "Calefacció", "Preinstal·lació d'A.C./B. Calor/Calefacció", 
-            "Parquet", "Armaris encastats", 'Placa de cocció amb gas', 
-            'Placa de cocció vitroceràmica', "Placa d'inducció", 'Plaques solars', "Safareig","Terrasses, balcons i patis"]
-    for i in vars:
-        bbdd_estudi_prom[i] = bbdd_estudi_prom[i].replace(np.nan, 0)
-    for i in vars_aux:
-        bbdd_estudi_hab[i] = bbdd_estudi_hab[i].replace(np.nan, 0)
-    bbdd_estudi_hab["Calefacció"] = bbdd_estudi_hab["Calefacció"].replace(' ', 0) 
-    bbdd_estudi_prom["Calefacció"] = bbdd_estudi_prom["Calefacció"].replace(' ', 0) 
+    # vars = ['Zona enjardinada', 'Parc infantil', 'Piscina comunitària', 
+    #         'Traster', 'Ascensor', 'Equipament Esportiu', 'Sala de jocs', 
+    #         'Sauna', 'Altres', "Aire condicionat", "Bomba de calor", 
+    #         "Aerotèrmia", "Calefacció", "Preinstal·lació d'A.C./B. Calor/Calefacció", 
+    #         "Parquet", "Armaris encastats", 'Placa de cocció amb gas', 
+    #         'Placa de cocció vitroceràmica', "Placa d'inducció", 'Plaques solars', "APAR"]
+    # vars_aux = ['Zona enjardinada', 'Parc infantil', 'Piscina comunitària', 
+    #         'Traster', 'Ascensor', 'Equipament Esportiu', 'Sala de jocs', 
+    #         'Sauna', 'Altres', "Aire condicionat", "Bomba de calor", 
+    #         "Aerotèrmia", "Calefacció", "Preinstal·lació d'A.C./B. Calor/Calefacció", 
+    #         "Parquet", "Armaris encastats", 'Placa de cocció amb gas', 
+    #         'Placa de cocció vitroceràmica', "Placa d'inducció", 'Plaques solars', "Safareig","Terrasses, balcons i patis"]
+    # for i in vars:
+    #     bbdd_estudi_prom[i] = bbdd_estudi_prom[i].replace(np.nan, 0)
+    # for i in vars_aux:
+    #     bbdd_estudi_hab[i] = bbdd_estudi_hab[i].replace(np.nan, 0)
+    # bbdd_estudi_hab["Calefacció"] = bbdd_estudi_hab["Calefacció"].replace(' ', 0) 
+    # bbdd_estudi_prom["Calefacció"] = bbdd_estudi_prom["Calefacció"].replace(' ', 0) 
 
 
     bbdd_estudi_hab["Tram_Sup_util"] = bbdd_estudi_hab["Tram_Sup_util"].str.replace(" ", "")
@@ -914,9 +915,8 @@ if selected == "Catalunya":
                     table76 = pd.merge(table76, bbdd_estudi_hab_mod[["TIPOG","Total dormitoris"]].groupby(["TIPOG","Total dormitoris"]).size().reset_index().rename(columns={0:"Total"}), how="left", on=["TIPOG","Total dormitoris"])
                     table76 = table76.rename(columns={"TIPOG":"Tipologia"})
                     fig = px.bar(table76, x="Preu mitjà", y="Total dormitoris", color="Tipologia", orientation='h', color_discrete_sequence=["#00D0A3","#AAC4BA","#008B6C"], barmode="group", title="", labels={'x':"Preu m\u00b2 útil (mitjana)", 'y':"Tipologia d'habitatge"})
-                    fig.layout.xaxis = dict(title="Preu mitjà", tickformat=",d")
-                    fig.layout.yaxis = dict(title="Tipologia d'habitatge")
-
+                    fig.layout.xaxis.title.text = "Preu mitjà"
+                    fig.layout.yaxis.title.text = "Tipologia d'habitatge"
                     fig.update_layout(font=dict(size=13), legend=dict(orientation='h', yanchor='bottom', y=1, xanchor='right', x=0.75))
                     return(fig)
                 st.plotly_chart(indicadors_preu_mitjanes(), use_container_width=True, responsive=True)
@@ -931,7 +931,7 @@ if selected == "Catalunya":
                     table76 = pd.merge(table76, bbdd_estudi_hab_mod[["TIPOG","Total dormitoris"]].groupby(["TIPOG","Total dormitoris"]).size().reset_index().rename(columns={0:"Total"}), how="left", on=["TIPOG","Total dormitoris"])
                     table76 = table76.rename(columns={"TIPOG":"Tipologia"})
                     fig = px.bar(table76, x="Preu m2 útil", y="Total dormitoris", color="Tipologia", orientation='h', color_discrete_sequence=["#00D0A3","#AAC4BA","#008B6C"], barmode="group", title="", labels={'x':"Preu m\u00b2 útil (mitjana)", 'y':"Tipologia d'habitatge"})
-                    fig.layout.xaxis = dict(title="Preu per m\u00b2 útil", tickformat=",d")
+                    fig.layout.xaxis.title.text = "Preu per m\u00b2 útil"
                     fig.layout.yaxis.title.text = "Tipologia d'habitatge"
                     fig.update_layout(font=dict(size=13), legend=dict(orientation='h', yanchor='bottom', y=1, xanchor='right', x=0.75))
                     return(fig)
@@ -1010,9 +1010,9 @@ if selected == "Catalunya":
                 st.write("""<p><b>Variació anual (%) dels principals indicadors per tipologia d'habitatge</b></p>""", unsafe_allow_html=True)
                 @st.cache_data(ttl=0.5*3600)
                 def plot_var_CAT():
-                    table117 = pd.read_excel(path + "Estudi_oferta_taules 2022.xlsx", sheet_name="table117", header=1).iloc[1:,]
-                    table121 = pd.read_excel(path + "Estudi_oferta_taules 2022.xlsx", sheet_name="table121", header=1).iloc[1:,]
-                    table125 = pd.read_excel(path + "Estudi_oferta_taules 2022.xlsx", sheet_name="table125", header=1).iloc[1:,]
+                    table117 = pd.read_excel(path + "Estudi_oferta_taules.xlsx", sheet_name="table117", header=1).iloc[1:,]
+                    table121 = pd.read_excel(path + "Estudi_oferta_taules.xlsx", sheet_name="table121", header=1).iloc[1:,]
+                    table125 = pd.read_excel(path + "Estudi_oferta_taules.xlsx", sheet_name="table125", header=1).iloc[1:,]
                     table117 = table117[(table117["Província"].isna()) & (table117["Municipi"].isna())][["Variació % Preu m2 útil","Variació % Preu mitjà", "Variació % Superfície útil"]]
                     table121 = table121[(table121["Província"].isna()) & (table121["Municipi"].isna())][["Variació % Preu m2 útil","Variació % Preu mitjà", "Variació % Superfície útil"]]
                     table125 = table125[(table125["Província"].isna()) & (table125["Municipi"].isna())][["Variació % Preu m2 útil","Variació % Preu mitjà", "Variació % Superfície útil"]]
@@ -1174,7 +1174,7 @@ if selected == "Catalunya":
                     table76 = pd.merge(table76, bbdd_estudi_hab_mod_2023[["TIPOG","Total dormitoris"]].groupby(["TIPOG","Total dormitoris"]).size().reset_index().rename(columns={0:"Total"}), how="left", on=["TIPOG","Total dormitoris"])
                     table76 = table76.rename(columns={"TIPOG":"Tipologia"})
                     fig = px.bar(table76, x="Preu mitjà", y="Total dormitoris", color="Tipologia", orientation='h', color_discrete_sequence=["#00D0A3","#AAC4BA","#008B6C"], barmode="group", title="", labels={'x':"Preu mitjà", 'y':"Tipologia d'habitatge"})
-                    fig.layout.xaxis = dict(title="Preu mitjà", tickformat=",d")
+                    fig.layout.xaxis.title.text = "Preu mitjà"
                     fig.layout.yaxis.title.text = "Tipologia d'habitatge"
                     fig.update_layout(font=dict(size=13), legend=dict(orientation='h', yanchor='bottom', y=1, xanchor='right', x=0.75))
                     return(fig)
@@ -1190,7 +1190,7 @@ if selected == "Catalunya":
                     table76 = pd.merge(table76, bbdd_estudi_hab_mod_2023[["TIPOG","Total dormitoris"]].groupby(["TIPOG","Total dormitoris"]).size().reset_index().rename(columns={0:"Total"}), how="left", on=["TIPOG","Total dormitoris"])
                     table76 = table76.rename(columns={"TIPOG":"Tipologia"})
                     fig = px.bar(table76, x="Preu m2 útil", y="Total dormitoris", color="Tipologia", orientation='h', color_discrete_sequence=["#00D0A3","#AAC4BA","#008B6C"], barmode="group", title="", labels={'x':"Preu m\u00b2 útil (mitjana)", 'y':"Tipologia d'habitatge"})
-                    fig.layout.xaxis = dict(title="Preu per m\u00b2 útil", tickformat=",d")
+                    fig.layout.xaxis.title.text = "Preu per m\u00b2 útil"
                     fig.layout.yaxis.title.text = "Tipologia d'habitatge"
                     fig.update_layout(font=dict(size=13), legend=dict(orientation='h', yanchor='bottom', y=1, xanchor='right', x=0.75))
                     return(fig)
@@ -1237,9 +1237,9 @@ if selected == "Catalunya":
                 st.write("""<p><b>Variació anual (%) dels principals indicadors per tipologia d'habitatge</b></p>""", unsafe_allow_html=True)
                 @st.cache_data(ttl=0.5*3600)
                 def plot_var_CAT():
-                    table117 = pd.read_excel(path + "Estudi_oferta_taules 2023.xlsx", sheet_name="table117", header=1).iloc[1:,]
-                    table121 = pd.read_excel(path + "Estudi_oferta_taules 2023.xlsx", sheet_name="table121", header=1).iloc[1:,]
-                    table125 = pd.read_excel(path + "Estudi_oferta_taules 2023.xlsx", sheet_name="table125", header=1).iloc[1:,]
+                    table117 = pd.read_excel(path + "Estudi_oferta_taules_1S2023.xlsx", sheet_name="table117", header=1).iloc[1:,]
+                    table121 = pd.read_excel(path + "Estudi_oferta_taules_1S2023.xlsx", sheet_name="table121", header=1).iloc[1:,]
+                    table125 = pd.read_excel(path + "Estudi_oferta_taules_1S2023.xlsx", sheet_name="table125", header=1).iloc[1:,]
                     table117 = table117[(table117["Província"].isna()) & (table117["Municipi"].isna())][["Variació % Preu m2 útil","Variació % Preu mitjà", "Variació % Superfície útil"]]
                     table121 = table121[(table121["Província"].isna()) & (table121["Municipi"].isna())][["Variació % Preu m2 útil","Variació % Preu mitjà", "Variació % Superfície útil"]]
                     table125 = table125[(table125["Província"].isna()) & (table125["Municipi"].isna())][["Variació % Preu m2 útil","Variació % Preu mitjà", "Variació % Superfície útil"]]
@@ -1425,10 +1425,11 @@ if selected == "Províncies i àmbits":
                 table33_prov.columns = ["Total dormitoris", "Habitatges en oferta"]
 
                 fig = go.Figure(go.Bar(x=table33_prov["Total dormitoris"], y=table33_prov["Habitatges en oferta"], marker_color='#AAC4BA'))
-                fig.layout.yaxis = dict(title="Habitages en oferta", tickformat=",d")
+
                 fig.update_layout(
                     title=f"Habitatges en oferta segons nombre d'habitacions",
                     xaxis_title="Nombre d'habitacions",
+                    yaxis_title="Habitatges en oferta"
                 )
                 return(fig)
             def tipo_obra_prov(prov):
@@ -1612,10 +1613,11 @@ if selected == "Províncies i àmbits":
                 table33_prov.columns = ["Total dormitoris", "Habitatges en oferta"]
 
                 fig = go.Figure(go.Bar(x=table33_prov["Total dormitoris"], y=table33_prov["Habitatges en oferta"], marker_color='#AAC4BA'))
-                fig.layout.yaxis = dict(title="Habitages en oferta", tickformat=",d")
+
                 fig.update_layout(
                     title=f"Habitatges en oferta segons nombre d'habitacions",
                     xaxis_title="Nombre d'habitacions",
+                    yaxis_title="Habitatges en oferta"
                 )
                 return(fig)
             def tipo_obra_prov(prov):
@@ -1764,7 +1766,7 @@ if selected == "Municipis":
             df = df["TIPOG"].value_counts().sort_values(ascending=True)
             fig = px.bar(df, y=df.index, x=df.values, orientation='h', title="", 
                         labels={'x':"Número d'habitatges", 'y':"TIPOG"}, text= df.values)
-            fig.layout.xaxis = dict(title="Nombre d'habitatges", tickformat=",d")
+            fig.layout.xaxis.title.text = "Número d'habitatges"
             fig.layout.yaxis.title.text = "Tipologia"
             fig.update_traces(marker=dict(color="#AAC4BA"))
             return fig
@@ -1776,8 +1778,8 @@ if selected == "Municipis":
             custom_order = ["0D", "1D", "2D", "3D", "4D", "5+D"]
             df = df["Total dormitoris"].value_counts().reindex(custom_order)
             fig = px.bar(df,  y=df.values, x=df.index,title="", labels={'x':"Número d'habitacions", 'y':"Número d'habitatges"}, text= df.values)
-            fig.layout.yaxis = dict(title="Nombre d'habitatges", tickformat=",d")
-            fig.layout.xaxis.title.text = "Nombre d'habitacions"
+            fig.layout.yaxis.title.text = "Número d'habitatges"
+            fig.layout.xaxis.title.text = "Número d'habitacions"
             fig.update_traces(marker=dict(color="#AAC4BA"))
             return fig
         
@@ -1786,8 +1788,8 @@ if selected == "Municipis":
 
             df = df["Banys i lavabos"].value_counts().sort_values(ascending=True)
             fig = px.bar(df,  y=df.values, x=df.index,title="", labels={'x':"Número de lavabos", 'y':"Número d'habitatges"}, text= df.values)
-            fig.layout.yaxis = dict(title="Nombre d'habitatges", tickformat=",d")
-            fig.layout.xaxis.title.text = "Nombre de lavabos"
+            fig.layout.yaxis.title.text = "Número d'habitatges"
+            fig.layout.xaxis.title.text = "Número de lavabos"
             fig.update_traces(marker=dict(color="#AAC4BA"))
             return fig
 
@@ -1829,7 +1831,6 @@ if selected == "Municipis":
             df_preus['Any'] = df_preus['Any'].astype(int)
             df_preus = df_preus[df_preus["Tipologia"]!="TOTAL HABITATGES"]
             fig = px.bar(df_preus, x='Any', y='Valor', color='Tipologia', color_discrete_sequence=["#AAC4BA","#00D0A3"], range_y=[0, None], labels={'Valor': variable_int, 'Any': 'Any'}, text= "Valor")
-            fig.layout.yaxis = dict(title= variable_int,tickformat=",d")
             valid_years = sorted(df_preus['Any'].unique())
             fig.update_xaxes(tickvals=valid_years)
             fig.update_layout(font=dict(size=13), legend=dict(orientation='h', yanchor='bottom', y=1.05, xanchor='right', x=0.75))
@@ -1839,7 +1840,6 @@ if selected == "Municipis":
             df_preus['Valor'] = np.where(df_preus['Valor']==0, np.NaN, round(df_preus['Valor'], 1))
             df_preus['Any'] = df_preus['Any'].astype(int)
             fig = px.bar(df_preus, x='Any', y='Valor', color='Tipologia', color_discrete_sequence=["#008B6C","#AAC4BA","#00D0A3"], range_y=[0, None], labels={'Valor': variable_int, 'Any': 'Any'}, text='Valor', barmode='group')
-            fig.layout.yaxis = dict(title= variable_int,tickformat=",d")
             fig.update_layout(font=dict(size=13), legend=dict(orientation='h', yanchor='bottom', y=1, xanchor='right', x=0.75))
             return fig
         left_col, right_col = st.columns((1, 1))
@@ -1907,7 +1907,7 @@ if selected == "Municipis":
             df = df["TIPOG"].value_counts().sort_values(ascending=True)
             fig = px.bar(df, y=df.index, x=df.values, orientation='h', title="", 
                         labels={'x':"Número d'habitatges", 'y':"TIPOG"}, text= df.values)
-            fig.layout.xaxis = dict(title="Nombre d'habitatges", tickformat=",d")
+            fig.layout.xaxis.title.text = "Número d'habitatges"
             fig.layout.yaxis.title.text = "Tipologia"
             fig.update_traces(marker=dict(color="#AAC4BA"))
             return fig
@@ -1919,8 +1919,8 @@ if selected == "Municipis":
             custom_order = ["0D", "1D", "2D", "3D", "4D", "5+D"]
             df = df["Total dormitoris"].value_counts().reindex(custom_order)
             fig = px.bar(df,  y=df.values, x=df.index,title="", labels={'x':"Número d'habitacions", 'y':"Número d'habitatges"}, text= df.values)
-            fig.layout.yaxis = dict(title="Nombre d'habitatges", tickformat=",d")
-            fig.layout.xaxis.title.text = "Nombre d'habitacions"
+            fig.layout.yaxis.title.text = "Número d'habitatges"
+            fig.layout.xaxis.title.text = "Número d'habitacions"
             fig.update_traces(marker=dict(color="#AAC4BA"))
             return fig
         
@@ -1929,8 +1929,8 @@ if selected == "Municipis":
 
             df = df["Banys i lavabos"].value_counts().sort_values(ascending=True)
             fig = px.bar(df,  y=df.values, x=df.index,title="", labels={'x':"Número de lavabos", 'y':"Número d'habitatges"}, text= df.values)
-            fig.layout.yaxis = dict(title="Nombre d'habitatges", tickformat=",d")
-            fig.layout.xaxis.title.text = "Nombre de lavabos"
+            fig.layout.yaxis.title.text = "Número d'habitatges"
+            fig.layout.xaxis.title.text = "Número de lavabos"
             fig.update_traces(marker=dict(color="#AAC4BA"))
             return fig
 
@@ -1972,7 +1972,6 @@ if selected == "Municipis":
             df_preus['Any'] = df_preus['Any'].astype(int)
             df_preus = df_preus[df_preus["Tipologia"]!="TOTAL HABITATGES"]
             fig = px.bar(df_preus, x='Any', y='Valor', color='Tipologia', color_discrete_sequence=["#AAC4BA","#00D0A3"], range_y=[0, None], labels={'Valor': variable_int, 'Any': 'Any'}, text= "Valor")
-            fig.layout.yaxis = dict(title="Unitats", tickformat=",d")
             valid_years = sorted(df_preus['Any'].unique())
             fig.update_xaxes(tickvals=valid_years)
             fig.update_layout(font=dict(size=13), legend=dict(orientation='h', yanchor='bottom', y=1.05, xanchor='right', x=0.75))
@@ -1982,7 +1981,6 @@ if selected == "Municipis":
             df_preus['Valor'] = np.where(df_preus['Valor']==0, np.NaN, round(df_preus['Valor'], 1))
             df_preus['Any'] = df_preus['Any'].astype(int)
             fig = px.bar(df_preus, x='Any', y='Valor', color='Tipologia', color_discrete_sequence=["#008B6C","#AAC4BA","#00D0A3"], range_y=[0, None], labels={'Valor': variable_int, 'Any': 'Any'}, text='Valor', barmode='group')
-            fig.layout.yaxis = dict(title= variable_int,tickformat=",d")
             fig.update_layout(font=dict(size=13), legend=dict(orientation='h', yanchor='bottom', y=1, xanchor='right', x=0.75))
             return fig
         left_col, right_col = st.columns((1, 1))
@@ -2177,7 +2175,6 @@ if selected=="Districtes de Barcelona":
             df_preus['Any'] = df_preus['Any'].astype(int)
             df_preus = df_preus[df_preus["Tipologia"]!="TOTAL HABITATGES"]
             fig = px.bar(df_preus[df_preus["Valor"]>0], x='Any', y='Valor', color='Tipologia', color_discrete_sequence=["#AAC4BA","#00D0A3"], range_y=[0, None], labels={'Valor': variable_int, 'Any': 'Any'}, text= "Valor")
-            fig.layout.yaxis = dict(title= variable_int,tickformat=",d")
             valid_years = sorted(df_preus['Any'].unique())
             fig.update_xaxes(tickvals=valid_years)
             fig.update_layout(font=dict(size=13), legend=dict(orientation='h', yanchor='bottom', y=1.05, xanchor='right', x=0.75))
@@ -2187,7 +2184,6 @@ if selected=="Districtes de Barcelona":
             df_preus['Valor'] = np.where(df_preus['Valor']==0, np.NaN, round(df_preus['Valor'], 1))
             df_preus['Any'] = df_preus['Any'].astype(int)
             fig = px.bar(df_preus[df_preus["Valor"]>0], x='Any', y='Valor', color='Tipologia', color_discrete_sequence=["#008B6C","#AAC4BA","#00D0A3"], range_y=[0, None], labels={'Valor': variable_int, 'Any': 'Any'}, text='Valor', barmode='group')
-            fig.layout.yaxis = dict(title= variable_int,tickformat=",d")
             fig.update_layout(font=dict(size=13), legend=dict(orientation='h', yanchor='bottom', y=1, xanchor='right', x=0.75))
             return fig
         
@@ -2337,7 +2333,6 @@ if selected=="Districtes de Barcelona":
             df_preus['Any'] = df_preus['Any'].astype(int)
             df_preus = df_preus[df_preus["Tipologia"]!="TOTAL HABITATGES"]
             fig = px.bar(df_preus, x='Any', y='Valor', color='Tipologia', color_discrete_sequence=["#AAC4BA","#00D0A3"], range_y=[0, None], labels={'Valor': variable_int, 'Any': 'Any'}, text= "Valor")
-            fig.layout.yaxis = dict(title= variable_int,tickformat=",d")
             fig.update_layout(font=dict(size=13), legend=dict(orientation='h', yanchor='bottom', y=1.05, xanchor='right', x=0.75))
             return fig
         def plot_dis_hist(selected_dis, variable_int, any_ini, any_fin):
@@ -2345,7 +2340,6 @@ if selected=="Districtes de Barcelona":
             df_preus['Valor'] = np.where(df_preus['Valor']==0, np.NaN, round(df_preus['Valor'], 1))
             df_preus['Any'] = df_preus['Any'].astype(int)
             fig = px.bar(df_preus, x='Any', y='Valor', color='Tipologia', color_discrete_sequence=["#008B6C","#AAC4BA","#00D0A3"], range_y=[0, None], labels={'Valor': variable_int, 'Any': 'Any'}, text='Valor', barmode='group')
-            fig.layout.yaxis = dict(title= variable_int,tickformat=",d")
             valid_years = sorted(df_preus['Any'].unique())
             fig.update_xaxes(tickvals=valid_years)
             fig.update_layout(font=dict(size=13), legend=dict(orientation='h', yanchor='bottom', y=1, xanchor='right', x=0.75))
