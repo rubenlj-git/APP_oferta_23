@@ -1732,10 +1732,9 @@ if selected == "Municipis":
             return([round(table80_mun["Preu mitjà"].values[0][0],2), round(table80_mun["Superfície útil"].values[0][0],2), 
                     round(table80_mun["Preu m2 útil"].values[0][0],2), proporcio_tipo, 
                     table61_hab["Total dormitoris"].values[0], table61_lav["Banys i lavabos"].values[0]])
-
         st.markdown(f"""Els resultats de l'Estudi d'Oferta de Nova Construcció del 2022 pel municipi de {selected_mun.split(',')[0].strip()} mostren que el preu mitjà dels habitatges en venda es troba 
-        en {data_text(selected_mun)[0]} € amb una superfície mitjana útil de {data_text(selected_mun)[1]} m\u00b2. Per tant, el preu per m\u00b2 útil es troba en {data_text(selected_mun)[2]} € de mitjana. Per tipologies, els habitatges plurifamiliars
-        representen el {data_text(selected_mun)[3]}% sobre el total d'habitatges, la resta corresponen a habitatges unifamiliars. L'habitatge modal o més freqüent de nova construcció té {data_text(selected_mun)[4]} habitacions i {data_text(selected_mun)[5]} banys o lavabos.""")
+        en {data_text(selected_mun)[0]:,.1f} € amb una superfície mitjana útil de {data_text(selected_mun)[1]:,.1f} m\u00b2. Per tant, el preu per m\u00b2 útil es troba en {data_text(selected_mun)[2]:,.1f} € de mitjana. Per tipologies, els habitatges plurifamiliars
+        representen el {data_text(selected_mun)[3]:,.1f}% sobre el total d'habitatges, la resta corresponen a habitatges unifamiliars. L'habitatge modal o més freqüent de nova construcció té {data_text(selected_mun)[4]} habitacions i {data_text(selected_mun)[5]} banys o lavabos.""")
 
         def plotmun_streamlit(data, selected_mun, kpi):
             df = data[(data['Municipi']==selected_mun)]
@@ -1877,8 +1876,8 @@ if selected == "Municipis":
                     table61_hab["Total dormitoris"].values[0], table61_lav["Banys i lavabos"].values[0]])
 
         st.markdown(f"""Els resultats de l'estudi d'oferta de nova construcció del 1S2023 pel municipi de {selected_mun.split(',')[0].strip()} mostren que el preu mitjà dels habitatges en venda es troba 
-        en {data_text(selected_mun)[0]} € amb una superfície mitjana útil de {data_text(selected_mun)[1]} m\u00b2. Per tant, el preu per m\u00b2 útil es troba en {data_text(selected_mun)[2]} € de mitjana. Per tipologies, els habitatges plurifamiliars
-        representen el {data_text(selected_mun)[3]}% sobre el total d'habitatges, la resta corresponen a habitatges unifamiliars. L'habitatge modal o més freqüent de nova construcció té {data_text(selected_mun)[4]} habitacions i {data_text(selected_mun)[5]} banys o lavabos.""")
+        en {data_text(selected_mun)[0]:,.1f} € amb una superfície mitjana útil de {data_text(selected_mun)[1]:,.1f} m\u00b2. Per tant, el preu per m\u00b2 útil es troba en {data_text(selected_mun)[2]:,.1f} € de mitjana. Per tipologies, els habitatges plurifamiliars
+        representen el {data_text(selected_mun)[3]:,.1f}% sobre el total d'habitatges, la resta corresponen a habitatges unifamiliars. L'habitatge modal o més freqüent de nova construcció té {data_text(selected_mun)[4]} habitacions i {data_text(selected_mun)[5]} banys o lavabos.""")
 
         def plotmun_streamlit(data, selected_mun, kpi):
             df = data[(data['Municipi']==selected_mun)]
@@ -1898,7 +1897,6 @@ if selected == "Municipis":
         with right_col:
             st.markdown(f"""**Distribució de Superfície útil**""")
             st.plotly_chart(plotmun_streamlit(bbdd_estudi_hab_mod_2023, selected_mun, "Superfície útil"), use_container_width=True, responsive=True)
-
         st.markdown(f"""
         **Tipologia d'habitatges de les promocions**
         """)
@@ -2080,8 +2078,8 @@ if selected=="Districtes de Barcelona":
                     table61_hab["Total dormitoris"].values[0], table61_lav["Banys i lavabos"].values[0]])
 
         st.markdown(f"""Els resultats de l'Estudi d'Oferta de Nova Construcció de 2022 pel districte de {selected_dis} de la ciutat de Barcelona mostren que el preu mitjà dels habitatges en venda es troba 
-        en {data_text(selected_dis)[0]} € amb una superfície mitjana útil de {data_text(selected_dis)[1]} m\u00b2. Per tant, el preu per m\u00b2 útil es troba en {data_text(selected_dis)[2]} € de mitjana. Per tipologies, els habitatges plurifamiliars
-        representen el {data_text(selected_dis)[3]}% sobre el total d'habitatges. L'habitatge modal o més freqüent de nova construcció té {data_text(selected_dis)[4]} habitacions i {data_text(selected_dis)[5]} banys o lavabos.""")
+        en {data_text(selected_dis)[0]:,.1f} € amb una superfície mitjana útil de {data_text(selected_dis)[1]:,.1f} m\u00b2. Per tant, el preu per m\u00b2 útil es troba en {data_text(selected_dis)[2]:,.1f} € de mitjana. Per tipologies, els habitatges plurifamiliars
+        representen el {data_text(selected_dis)[3]:,.1f}% sobre el total d'habitatges. L'habitatge modal o més freqüent de nova construcció té {data_text(selected_dis)[4]} habitacions i {data_text(selected_dis)[5]} banys o lavabos.""")
         def plotdis_streamlit(data, selected_dis, kpi):
             df = data[(data['Nom DIST']==selected_dis)]
             fig = px.histogram(df, x=kpi, title= "", labels={'x':kpi, 'y':'Freqüència'})
@@ -2240,8 +2238,8 @@ if selected=="Districtes de Barcelona":
                     table61_hab["Total dormitoris"].values[0], table61_lav["Banys i lavabos"].values[0]])
 
         st.markdown(f"""Els resultats de l'estudi d'oferta de nova construcció del 1S2023 pel districte de {selected_dis} de la ciutat de Barcelona mostren que el preu mitjà dels habitatges en venda es troba 
-        en {data_text(selected_dis)[0]} € amb una superfície mitjana útil de {data_text(selected_dis)[1]} m\u00b2. Per tant, el preu per m\u00b2 útil es troba en {data_text(selected_dis)[2]} € de mitjana. Per tipologies, els habitatges plurifamiliars
-        representen el {data_text(selected_dis)[3]}% sobre el total d'habitatges. L'habitatge modal o més freqüent de nova construcció té {data_text(selected_dis)[4]} habitacions i {data_text(selected_dis)[5]} banys o lavabos.""")
+        en {data_text(selected_dis)[0]:,.1f} € amb una superfície mitjana útil de {data_text(selected_dis)[1]:,.1f} m\u00b2. Per tant, el preu per m\u00b2 útil es troba en {data_text(selected_dis)[2]:,.1f} € de mitjana. Per tipologies, els habitatges plurifamiliars
+        representen el {data_text(selected_dis)[3]:,.1f}% sobre el total d'habitatges. L'habitatge modal o més freqüent de nova construcció té {data_text(selected_dis)[4]} habitacions i {data_text(selected_dis)[5]} banys o lavabos.""")
         def plotdis_streamlit(data, selected_dis, kpi):
             df = data[(data['Nom DIST']==selected_dis)]
             fig = px.histogram(df, x=kpi, title= "", labels={'x':kpi, 'y':'Freqüència'})
