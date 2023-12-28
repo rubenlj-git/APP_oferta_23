@@ -5,7 +5,7 @@
 
 .button, .button:link, .button:visited {
   font-size: 20px;
-  background-color: #00D0A3;
+  background-color: #66b9a7;
   color: white;
   padding: 14px 25px;
   text-align: center;
@@ -31,7 +31,7 @@ table {
 }
 
 table thead th {
-  background-color: #00D0A3;
+  background-color: #66b9a7;
   color: #FFFFFF;
 }
 
@@ -40,7 +40,7 @@ table tbody tr:nth-of-type(even) {
 }
 
 table tbody tr:last-of-type {
-  border-bottom: 2px solid #00D0A3;
+  border-bottom: 2px solid #66b9a7;
 }
 
 table tbody td {
@@ -64,7 +64,7 @@ table tbody td {
 }
 
 .button:hover, .button:active {
-  background-color: #00D0A3;
+  background-color: #66b9a7;
 }
 
 /* Style inputs with type="text", type="email"and textareas */
@@ -77,7 +77,7 @@ input[type=text], input[type=email], textarea {
   resize: vertical; /* Allow the user to vertically resize the textarea (not horizontally) */
   color:white;
   border-color: white;
-  background-color: #00D0A3; /* Set background color to white */
+  background-color: #66b9a7; /* Set background color to white */
 }
 
 input[type=text]::placeholder,
@@ -132,7 +132,7 @@ p, ul, li{
   margin-bottom: 10px;
 }
 .download-button {
-  background-color: #00D0A3; /* Red background */
+  background-color: #66b9a7; /* Red background */
   color: #fff; /* White text */
   border: none; /* No border */
   padding: 12px 24px; /* Padding around text */
@@ -144,7 +144,7 @@ p, ul, li{
 }
 
 .download-button:hover {
-  background-color: #00D0A3; /* Darker red background on hover */
+  background-color: #66b9a7; /* Darker red background on hover */
   cursor: pointer; /* Change cursor to hand on hover */
 }
 
